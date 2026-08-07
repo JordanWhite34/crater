@@ -1,0 +1,23 @@
+# Dataset artifacts (keep the repository lightweight and reproducible).
+images/
+annotations/
+manifests/
+audit/
+
+# Python-generated files and local environments.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local tooling and editor files.
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.idea/
+.vscode/
+
+# OS metadata.
+.DS_Store
+Thumbs.db
