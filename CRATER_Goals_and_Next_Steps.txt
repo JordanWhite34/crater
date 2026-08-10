@@ -228,6 +228,278 @@ the team should begin assembling and licensing the 200-to-300-image military
 bridge dataset, because that dataset is the main dependency for detecting the
 final CRATER components.
 
+STEP 2 STATUS (August 10, 2026)
+
+- In progress.
+- Completed increment 1: separated the detector stack from the dataset-build
+  dependencies and pinned the locally tested Torch 2.9.1, TorchVision 0.24.1,
+  and pycocotools 2.0.11 versions in `requirements-training.txt`.
+- Completed increment 2: added a bounded training smoke command that loads real
+  boxes from the 23-class COCO taxonomy, builds the 24-output Faster R-CNN
+  head, performs one optimizer step, and records the smoke inputs, environment,
+  losses, and annotation-file SHA-256. Invalid learning rates and image sizes
+  are rejected before training.
+- Completed increment 3: excluded artifacts written beneath the local `runs`
+  directory from version control.
+- Locally verified: the offline CPU smoke step passed against a real training
+  image with four boxes. All losses were finite (total loss 4.0043), and the
+  backward pass and optimizer update completed successfully. The generated
+  JSON is a smoke result, not a trained baseline checkpoint.
+- Verification command: `python tools/train_civilian_detector.py --device cpu
+  --weights none`. Output: `runs/civilian_detector_smoke/smoke_result.json`.
+- The CPU smoke losses and deterministic configuration fields matched across
+  two repeated runs; the recorded annotation SHA-256 matched the source file,
+  and invalid zero/NaN learning rates and a zero image size were rejected with
+  command-line errors.
+- Completed increment 4: created an isolated `.venv`, installed Torch
+  2.9.1+cu128 and TorchVision 0.24.1+cu128 from the CUDA 12.8 wheel index, and
+  installed the remaining pinned dependencies from `requirements-training.txt`.
+- Locally verified the CUDA environment: the RTX 2000 Ada was detected at
+  compute capability 8.9, a TorchVision NMS operation completed on `cuda:0`,
+  and `pip check` reported no broken requirements.
+- Completed increment 5: extended the bounded smoke artifact to record CUDA
+  runtime, GPU name, step time, and peak allocated GPU memory.
+- Completed increment 6: downloaded the official COCO-pretrained Faster R-CNN
+  checkpoint and passed a native 640-by-640 optimizer step on the laptop GPU.
+  The step took 0.654 seconds, used 667 MiB peak allocated VRAM, and produced a
+  finite total loss of 3.8803.
+- CUDA smoke command: `.venv\Scripts\python.exe
+  tools\train_civilian_detector.py --device cuda --weights coco --image-size
+  640 --output-dir runs\civilian_detector_pretrained_smoke`. Output:
+  `runs/civilian_detector_pretrained_smoke/smoke_result.json`.
+- Completed increment 7: added a native epoch loop with CUDA AMP, deterministic
+  per-epoch shuffling, bounded-pilot mode, finite-loss checks, throughput and
+  memory reporting, and one atomically replaced epoch-boundary checkpoint.
+  Resume locks the dataset hash, taxonomy, model, image size, batch size,
+  optimizer settings, runtime versions, and AMP mode before restoring state.
+- Pilot preflight passed for two CUDA/AMP batches at 640-by-640 and batch size
+  two. Mean loss was 4.2578, peak allocated VRAM was 1,153 MiB, throughput was
+  0.652 seconds per batch, and the early full-epoch projection was 14.0 minutes.
+  This two-batch model was deliberately discarded; the checkpoint and resume
+  paths remain unverified.
+- Checkpoint review caught and fixed a strict-load incompatibility by storing
+  the Torch version as a plain string rather than a `TorchVersion` object.
+  A direct atomic save and `weights_only=True` round trip then passed, including
+  optimizer, scaler, RNG, history, and contract fields.
+- The 50-batch CUDA/AMP pilot passed on 100 training images. Mean loss was
+  1.5626, sustained throughput was 0.228 seconds per batch, peak allocated VRAM
+  was 1,318 MiB, and the measured full-epoch projection was 4.9 minutes. The
+  pilot model was deliberately discarded and no checkpoint was claimed.
+- Completed increment 8: trained epoch 1 across all 2,585 civilian training
+  images in 1,293 batches. The epoch took 277.0 seconds, used 1,318 MiB peak
+  allocated VRAM, and produced mean total loss 0.7920.
+- Saved `runs/civilian_detector_baseline/checkpoint_last.pt` (331 MB) plus the
+  resolved configuration and training history. A strict reload verified epoch
+  1, global step 1,293, all 295 model tensors, SGD state, AMP scaler state, RNG
+  state, and the source annotation SHA-256.
+- Completed increment 9: protected durable runs from accidental replacement.
+  Fresh training now refuses to overwrite an existing checkpoint, resume
+  defaults to and validates the checkpoint's own directory, pilot defaults are
+  isolated, and bounded pilots no longer fetch an unused extra batch. The
+  existing-checkpoint refusal was locally verified before model construction.
+- First epoch-2 resume attempt stopped before training or checkpoint writes.
+  TorchVision selected a different default number of trainable backbone layers
+  when constructing without pretrained weights, so the restored SGD parameter
+  group size did not match epoch 1. The epoch-1 checkpoint remains intact; the
+  backbone depth must be explicit and locked before retrying.
+- Attempted increment 10: explicitly requested three
+  trainable ResNet backbone layers for both pretrained initialization and
+  checkpoint reconstruction. The value is now stored and resume-locked; the
+  epoch-1 checkpoint is compatibly interpreted as the same prior default.
+- Increment 10 verification exposed a TorchVision constraint: when no weights
+  are supplied for checkpoint reconstruction, the constructor ignores the
+  requested depth and makes all five backbone layers trainable. The optimizer
+  preflight still failed safely; the epoch-1 checkpoint remains unchanged.
+- Attempted increment 11: made the freeze policy explicit after model
+  construction, keeping only ResNet layers 2 through 4 trainable regardless of
+  the weight-loading path. Optimizer-state compatibility is pending recheck.
+- Increment 11 verification still found 156 trainable tensors versus the
+  checkpoint's 72. The remaining difference is normalization: TorchVision uses
+  frozen batch normalization for pretrained construction but ordinary,
+  trainable batch normalization without weights. Resume reconstruction must
+  explicitly preserve the frozen-normalization architecture without requiring
+  another weight download.
+- Completed increment 12: checkpoint reconstruction now builds a ResNet-50 FPN
+  backbone with explicit frozen batch normalization and three trainable layers,
+  then attaches the same Faster R-CNN head without loading external weights.
+  Strict model and SGD restoration now passes with the same 72 trainable tensors
+  as the epoch-1 checkpoint.
+- Completed increment 13: resumed the real checkpoint and trained epoch 2 over
+  all 2,585 images. The epoch took 242.6 seconds, used 1,313 MiB peak allocated
+  VRAM, and reduced mean total training loss from 0.7920 to 0.4920.
+- The replaced checkpoint strictly reloads at epoch 2 and global step 2,586
+  with two history records, 72 SGD states, AMP/RNG state, the annotation hash,
+  frozen batch normalization, and three trainable backbone layers.
+- Completed increment 14: added a validation-only COCO bbox evaluator that
+  strictly loads the checkpoint, verifies the 23-class taxonomy, runs full-
+  precision inference, and reports overall plus per-class AP, AP50, and AR100.
+  It has no test-split option, so model-selection work cannot touch the held-out
+  test set accidentally. It validates prediction integrity and COCO metric
+  slicing, saves the raw predictions and input hashes, flags low-support
+  classes, and records a 22-class selection AP that excludes the ambiguous
+  two-instance `object` class.
+- First validation execution completed inference and COCO scoring but strict
+  JSON output rejected a NumPy `int64` category ID. Provisional console metrics
+  were AP 0.442, AP50 0.738, and AR100 0.589; they are not yet recorded results.
+  No metrics artifact was written and the held-out test split remains untouched.
+- Completed increment 15: normalized COCO evaluator category IDs to native
+  Python integers before strict JSON serialization. The full rerun completed in
+  increment 16; provisional console values were not used for model selection.
+- Completed increment 16: epoch-2 validation ran across all 193 validation
+  images and saved 7,745 raw detections plus hashed metrics. Overall COCO AP was
+  0.4422, AP50 was 0.7381, and AR100 was 0.5885. The 22-class selection AP was
+  0.4623; `front_glass` AP was 0.6710 and `wheel` AP was 0.2371. The ambiguous
+  `object` class had only two instances, scored zero, and remains low-support.
+- Validation artifacts: `runs/civilian_detector_baseline/validation_epoch_002/
+  validation_metrics.json` and `validation_predictions.json`. FP32 inference
+  took 11.8 seconds at 16.3 images per second and 552 MiB peak allocated VRAM.
+- Training-selection rule: improve the 22-class validation AP by at least 0.005
+  to replace the best checkpoint. Train one epoch at a time, stop after two
+  consecutive sub-threshold improvements, and cap the first run at epoch 8.
+  Do not access the test split until the checkpoint and configuration are frozen.
+- Completed increment 17: preserved epoch 2 as the initial
+  `checkpoint_best.pt`; its SHA-256 matches `checkpoint_last.pt` at the validated
+  epoch-2 state (`BDDE673D90995616678EB8BA50F07717C97AA1D02632068CE4E527EDE01825EC`).
+- Completed increment 18: resumed through epoch 3 across all 2,585 training
+  images. The epoch took 263.6 seconds, used 1,315 MiB peak allocated VRAM, and
+  reduced mean total training loss to 0.3855. `checkpoint_last.pt` strictly
+  reloads at epoch 3 and global step 3,879; epoch 2 remains preserved as best.
+- Completed increment 19: epoch-3 validation improved the 22-class selector AP
+  from 0.4623 to 0.5356 (+0.0733), overall AP from 0.4422 to 0.5123, AP50 to
+  0.7962, and AR100 to 0.6368. `front_glass` AP reached 0.7904 and `wheel` AP
+  reached 0.2501. The epoch exceeds the 0.005 best-checkpoint threshold;
+  promotion is pending.
+- The first best-promotion swap failed safely because `.NET File.Replace`
+  rejected the OneDrive path form. Hash verification confirmed that epoch 2
+  remains `checkpoint_best.pt`, epoch 3 remains `checkpoint_last.pt`, and the
+  complete epoch-3 temporary copy is intact; no checkpoint was lost.
+- The available PowerShell/.NET runtime also lacks an overwrite-move overload;
+  that second swap made no change. Promotion will use a verified overwrite copy
+  while `checkpoint_last.pt` preserves the same epoch-3 state for recovery.
+- Completed increment 20: promoted epoch 3 with a verified overwrite copy.
+  `checkpoint_best.pt` and `checkpoint_last.pt` both hash to
+  `3556C0279A20F0EF8017247390605629D8BC7F13141FCC8CDC95392832345B8F`.
+  The temporary duplicate was removed only after verification and remains
+  recoverable from either retained checkpoint.
+- Completed increment 21: resumed through epoch 4 in 240.4 seconds with 1,315
+  MiB peak allocated VRAM and mean total training loss 0.3319.
+  `checkpoint_last.pt` strictly reloads at epoch 4/global step 5,172, while the
+  epoch-3 best checkpoint remains protected pending validation.
+- Completed increment 22: epoch-4 validation raised selector AP from 0.5356 to
+  0.5479 (+0.0123), overall AP to 0.5241, and AR100 to 0.6449.
+  `front_glass` AP reached 0.8038 and `wheel` AP reached 0.2779. This exceeds
+  the 0.005 promotion threshold; epoch-4 promotion is pending.
+- Completed increment 23: promoted epoch 4. Both retained checkpoints hash to
+  `55A780208667E30C5A1F551DB2B6FB934AD612FD5B970A92413893CCF9E0515C`.
+- Completed increment 24: resumed through epoch 5 in 242.0 seconds with 1,314
+  MiB peak allocated VRAM and mean total training loss 0.2891.
+  `checkpoint_last.pt` strictly reloads at epoch 5/global step 6,465; epoch 4
+  remains the best checkpoint pending validation.
+- Completed increment 25: epoch-5 selector AP reached 0.5521, only +0.0042 over
+  the epoch-4 best and below the 0.005 promotion threshold. Overall AP improved
+  slightly to 0.5281, but AR100 fell to 0.6341, `front_glass` AP fell to 0.7573,
+  and `wheel` AP fell to 0.2565. Epoch 4 remains best; this is the first of two
+  consecutive sub-threshold epochs allowed by the stopping rule.
+- Completed increment 26: resumed through epoch 6 in 242.1 seconds with 1,313
+  MiB peak allocated VRAM and mean total training loss 0.2609.
+  `checkpoint_last.pt` strictly reloads at epoch 6/global step 7,758; epoch 4
+  remains best pending the stopping-rule validation.
+- Completed increment 27: epoch-6 validation raised selector AP to 0.5704,
+  +0.0225 over the epoch-4 best. Overall AP reached 0.5456, AP50 0.8208, AR100
+  0.6489, and `wheel` AP 0.2896. `front_glass` AP remained below its epoch-4
+  value at 0.7585 and stays a transfer guardrail, but the primary selector
+  clears promotion and resets the sub-threshold counter. Promotion is pending.
+- Completed increment 28: promoted epoch 6. Both retained checkpoints hash to
+  `3F774C252CF48A8C97A39956956B4CCC7F08821C800AAE528920E7AC20C7BAA1`.
+- Completed increment 29: resumed through epoch 7 in 241.6 seconds with 1,313
+  MiB peak allocated VRAM and mean total training loss 0.2391.
+  `checkpoint_last.pt` strictly reloads at epoch 7/global step 9,051; epoch 6
+  remains best pending validation.
+- Completed increment 30: epoch-7 validation raised selector AP to 0.5887,
+  +0.0183 over epoch 6. Overall AP reached 0.5631, AP50 0.8272, AR100 0.6581,
+  `front_glass` AP 0.8363, and `wheel` AP 0.3488. Epoch 7 clears promotion;
+  promotion is pending and the initial hard-cap epoch 8 remains.
+- Completed increment 31: promoted epoch 7. Both retained checkpoints hash to
+  `C8BADA9FB179FEF2525084A469A2B4324B61B05EB7882E4D27FE2038921B6C22`.
+- Completed increment 32: trained the hard-cap epoch 8. The epoch took 241.5
+  seconds, used 1,313 MiB peak allocated VRAM, and produced mean total training
+  loss 0.2292. All eight epochs consumed 33.18 minutes of measured training
+  time. `checkpoint_last.pt` strictly reloads at epoch 8/global step 10,344;
+  epoch 7 remains best pending final validation.
+- Completed increment 33: epoch-8 validation regressed versus epoch 7. Selector
+  AP fell by 0.0129 to 0.5758, overall AP fell to 0.5508, AR100 to 0.6423,
+  `front_glass` AP to 0.8070, and `wheel` AP to 0.3073. Training stopped at the
+  hard cap with epoch 7 selected as best.
+- Final training state: `checkpoint_best.pt` is epoch 7/global step 9,051 with
+  hash `C8BADA9FB179FEF2525084A469A2B4324B61B05EB7882E4D27FE2038921B6C22`;
+  `checkpoint_last.pt` preserves epoch 8/global step 10,344 with hash
+  `EA171ADF375344A4251C7B4920CA5A3A24418BC52033EF86BFE2BA5D74F42CBC`.
+  The civilian training phase is complete; final test metrics are recorded
+  below, and example overlays remain for the full Step 2 deliverable.
+- Evaluation limitation: the civilian `object` class has no held-out test
+  instances, so its test precision, recall, and AP must be reported as not
+  supported rather than zero.
+- Next smallest increment: generate representative overlays directly from the
+  saved final-test predictions, without another inference pass. Include clear
+  successes, localization errors, false positives, and rare-class examples;
+  keep the frozen test metrics descriptive rather than using them for training.
+- August 10 freeze decision: keep the civilian training phase closed rather
+  than adding a post-cap learning-rate experiment. Epoch 7 is the best among
+  the evaluated epochs 2 through 8; epoch 1 was not validated. The final test
+  must bind to the frozen epoch-7 checkpoint SHA-256
+  `C8BADA9FB179FEF2525084A469A2B4324B61B05EB7882E4D27FE2038921B6C22`,
+  require a new output directory, and refuse to overwrite completed results.
+  Test results are for final reporting only and must not drive more training or
+  model selection.
+- Completed increment 34: added a guarded final-test mode to the existing COCO
+  evaluator without adding a generic split argument. Validation remains the
+  default. Test mode requires an explicit `checkpoint_best.pt`, an expected
+  checkpoint SHA-256, and a new output directory; it binds the prepared test
+  annotations to SHA-256
+  `2187072B83F9AB5FA14825EF9E99FFBE6CEA6945C5E1C1570337DE8358045A71`
+  and 192 images. It refuses existing output, verifies the checkpoint again
+  after inference, writes predictions and metrics atomically, omits the
+  validation selection metric, records per-class prediction counts, and
+  requires the zero-instance `object` class to have null AP and recall. The
+  module compiles and its command-line help loads. At this code-only stage,
+  validation regression and the final frozen-hash test were pending; increments
+  35 and 36 below record their completion.
+- Completed increment 35: verified the split firewall before test access.
+  Invalid digests, an omitted checkpoint, `checkpoint_last.pt`, and an existing
+  output directory were all rejected. A new full validation run from the frozen
+  epoch-7 checkpoint reproduced overall AP `0.5630897923031051`, AP50
+  `0.8271879875357299`, AR100 `0.6580956045873069`, and selector AP
+  `0.588684782862337` exactly. Its raw predictions hash to
+  `F7FCD2897A3F65912C3DADB1FCF0D78B3AAEB35F1E7D3B8E5C1B002E3465EC2C`.
+  At this pre-test verification stage no final-test output directory existed;
+  increment 36 below records the subsequently completed held-out run.
+- Completed increment 36: ran the single final held-out test from the frozen
+  epoch-7 checkpoint on all 192 test images. Overall COCO AP was
+  `0.5802762772954754`, AP50 was `0.8621467293959415`, and AR100 was
+  `0.6812161556419638`. The run saved 3,049 detections; 22 categories are
+  supported. `object` is the sole unsupported category with zero ground-truth
+  instances, zero predictions, and null AP, AP50, and AR100. No test selection
+  metric was computed or saved. The two direct-transfer guardrails were
+  `front_glass` AP `0.8199849702917129` and `wheel` AP
+  `0.4057305128080974`. `tailgate` AP was `0.45088558855885585`, but its nine
+  test instances make that estimate low-support and unstable.
+- Final-test command: `.\.venv\Scripts\python.exe
+  tools\evaluate_civilian_detector.py --final-test
+  C8BADA9FB179FEF2525084A469A2B4324B61B05EB7882E4D27FE2038921B6C22
+  --checkpoint runs\civilian_detector_baseline\checkpoint_best.pt --data-root
+  . --device cuda --batch-size 2 --num-workers 0 --output-dir
+  runs\civilian_detector_baseline\test_final_epoch_007`.
+- Final-test artifacts:
+  `runs/civilian_detector_baseline/test_final_epoch_007/test_predictions.json`
+  hashes to
+  `91D9C651DB77050C7A7F7933DD33BD81964D4B890431600D7D86664C551AE767`;
+  `test_metrics.json` hashes to
+  `B165FAEE6BFA2291A0DBE10CBA2B6E62F39803EDE2553EC0AAA8A4513979C5CE`.
+  The checkpoint still hashes to the frozen epoch-7 digest after evaluation,
+  both JSON artifacts pass strict consistency checks, and no temporary files
+  remain. These test results close metric evaluation and will not be used to
+  resume training; example overlays remain before Step 2 is complete.
+
 
 8. MVP SUCCESS CRITERIA
 

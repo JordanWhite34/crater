@@ -3,6 +3,7 @@ images/
 annotations/
 manifests/
 audit/
+/runs/
 
 # Python-generated files and local environments.
 __pycache__/

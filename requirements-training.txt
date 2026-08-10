@@ -1,0 +1,4 @@
+-r requirements.txt
+torch==2.9.1
+torchvision==0.24.1
+pycocotools==2.0.11
