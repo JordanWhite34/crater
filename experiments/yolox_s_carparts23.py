@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from yolox.exp import Exp as YOLOXExp
-from yolox.data import COCODataset, TrainTransform
+from yolox.data import COCODataset, TrainTransform, ValTransform
 
 
 class Exp(YOLOXExp):
@@ -36,4 +36,16 @@ class Exp(YOLOXExp):
             ),
             cache=cache,
             cache_type=cache_type,
+        )
+
+    def get_eval_dataset(self, **kwargs):
+        testdev = kwargs.get("testdev", False)
+        legacy = kwargs.get("legacy", False)
+
+        return COCODataset(
+            data_dir=self.data_dir,
+            json_file=self.test_ann if testdev else self.val_ann,
+            name="",
+            img_size=self.test_size,
+            preproc=ValTransform(legacy=legacy),
         )
