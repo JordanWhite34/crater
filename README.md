@@ -73,7 +73,8 @@ images/{train,val,test}/
 annotations/
 manifests/
 audit/
-tools/prepare_carparts_seg.py
+utils/download_car_data.py
+utils/prepare_carparts_seg.py
 MILITARY_ANNOTATION_GUIDE.md
 THIRD_PARTY_NOTICES.md
 requirements.txt
@@ -81,13 +82,25 @@ requirements.txt
 
 All image paths in the COCO files are relative to this dataset root.
 
+## Training
+
+YOLOX training code is pinned as a Git submodule under `third_party/YOLOX`.
+CRATER-owned experiment configurations belong in `experiments/`; pretrained
+weights and generated runs belong in the ignored `weights/` and `outputs/`
+directories. See [`experiments/README.md`](experiments/README.md) for the
+23-class YOLOX-S baseline workflow and the planned transfer-learning boundary.
+
 ## Reproducing the preparation
 
-After extracting the upstream Carparts-Seg archive:
+Install the preparation dependencies and run the dataset downloader from the
+repository root:
 
-```bash
-python tools/prepare_carparts_seg.py SOURCE_DIR OUTPUT_DIR
+```powershell
+python -m pip install -r requirements.txt
+python utils\download_car_data.py
 ```
 
-The upstream archive SHA-256 is recorded in `audit/audit_report.json`.
-
+The downloader verifies the upstream archive SHA-256, safely extracts it,
+recreates the deterministic cleaned splits, validates their expected counts,
+and installs `images/`, `annotations/`, `manifests/`, and `audit/`. It refuses
+to overwrite any existing dataset directory.

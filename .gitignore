@@ -4,6 +4,11 @@ annotations/
 manifests/
 audit/
 
+# Model inputs and generated training artifacts.
+weights/
+outputs/
+cache_*/
+
 # Python-generated files and local environments.
 __pycache__/
 *.py[cod]
