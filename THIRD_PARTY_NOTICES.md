@@ -32,3 +32,20 @@ Suggested citation:
 
 No Ultralytics model weights or Python source code are included or required.
 
+## YOLOX
+
+- Project: `YOLOX`
+- Copyright: Copyright (c) 2021-2022 Megvii Inc. All rights reserved.
+- Source: <https://github.com/Megvii-BaseDetection/YOLOX>
+- Included as: Git submodule at `third_party/YOLOX`
+- Pinned revision: `6ddff4824372906469a7fae2dc3206c7aa4bbaee`
+- License: Apache License 2.0
+- License text: `third_party/YOLOX/LICENSE`
+- License URL: <https://www.apache.org/licenses/LICENSE-2.0>
+
+YOLOX is included as the third-party detection framework used to configure,
+train, evaluate, and export CRATER object-detection models. CRATER-specific
+dataset preparation, experiment configuration, and trained model artifacts are
+separate from the upstream YOLOX source. The YOLOX submodule is retained at the
+revision listed above so training behavior can be reproduced against a known
+upstream version.
