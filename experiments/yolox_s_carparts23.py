@@ -3,6 +3,8 @@ from pathlib import Path
 from yolox.exp import Exp as YOLOXExp
 from yolox.data import COCODataset, TrainTransform, ValTransform
 
+from standard_coco_evaluator import StandardCOCOEvaluator
+
 
 class Exp(YOLOXExp):
     def __init__(self):
@@ -23,7 +25,6 @@ class Exp(YOLOXExp):
         self.output_dir = str(project_root / "outputs" / "yolox")
 
     def get_dataset(self, cache=False, cache_type="ram"):
-
         return COCODataset(
             data_dir=self.data_dir,
             json_file=self.train_ann,
@@ -39,13 +40,35 @@ class Exp(YOLOXExp):
         )
 
     def get_eval_dataset(self, **kwargs):
-        testdev = kwargs.get("testdev", False)
-        legacy = kwargs.get("legacy", False)
+        annotation_file = (
+            self.test_ann if kwargs.get("testdev", False) else self.val_ann
+        )
 
         return COCODataset(
             data_dir=self.data_dir,
-            json_file=self.test_ann if testdev else self.val_ann,
+            json_file=annotation_file,
             name="",
             img_size=self.test_size,
-            preproc=ValTransform(legacy=legacy),
+            preproc=ValTransform(legacy=kwargs.get("legacy", False)),
+        )
+
+    def get_evaluator(
+        self,
+        batch_size,
+        is_distributed,
+        testdev=False,
+        legacy=False,
+    ):
+        return StandardCOCOEvaluator(
+            dataloader=self.get_eval_loader(
+                batch_size,
+                is_distributed,
+                testdev=testdev,
+                legacy=legacy,
+            ),
+            img_size=self.test_size,
+            confthre=self.test_conf,
+            nmsthre=self.nmsthre,
+            num_classes=self.num_classes,
+            testdev=testdev,
         )
