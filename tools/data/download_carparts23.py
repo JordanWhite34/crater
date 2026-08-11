@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Download and reproduce the prepared CRATER car-parts dataset.
+"""Download and reproduce the prepared CRATER Carparts23 dataset.
 
 The public archive contains the original YOLO-segmentation data. This script
 verifies that archive, extracts it safely, runs the deterministic CRATER
 preparation pipeline, validates the result, and installs the ignored dataset
-directories into the repository checkout.
+directories into ``datasets/civilian/carparts23`` by default.
 """
 
 from __future__ import annotations
@@ -38,13 +38,16 @@ EXPECTED = {
 
 
 def parse_args() -> argparse.Namespace:
-    repository_root = Path(__file__).resolve().parents[1]
+    repository_root = Path(__file__).resolve().parents[2]
+    default_dataset_root = (
+        repository_root / "datasets" / "civilian" / "carparts23"
+    )
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--output-root",
         type=Path,
-        default=repository_root,
-        help="Repository root receiving images, annotations, manifests, and audit",
+        default=default_dataset_root,
+        help="Dataset root receiving images, annotations, manifests, and audit",
     )
     parser.add_argument(
         "--archive",
@@ -163,7 +166,7 @@ def find_source_root(extracted_root: Path) -> Path:
 def run_preparation(source_root: Path, prepared_root: Path, workers: int) -> None:
     if workers < 1:
         raise ValueError("--similarity-workers must be at least 1")
-    prepare_script = Path(__file__).with_name("prepare_carparts_seg.py")
+    prepare_script = Path(__file__).with_name("prepare_carparts23.py")
     if not prepare_script.is_file():
         raise FileNotFoundError(f"Missing preparation script: {prepare_script}")
     command = [

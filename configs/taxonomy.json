@@ -1,0 +1,85 @@
+{
+  "detectors": {
+    "civilian_carparts23": {
+      "classes": [
+        "back_bumper",
+        "back_door",
+        "back_glass",
+        "back_left_door",
+        "back_left_light",
+        "back_light",
+        "back_right_door",
+        "back_right_light",
+        "front_bumper",
+        "front_door",
+        "front_glass",
+        "front_left_door",
+        "front_left_light",
+        "front_light",
+        "front_right_door",
+        "front_right_light",
+        "hood",
+        "left_mirror",
+        "object",
+        "right_mirror",
+        "tailgate",
+        "trunk",
+        "wheel"
+      ]
+    },
+    "military_crater6": {
+      "classes": [
+        "windshield",
+        "wheel",
+        "track",
+        "hull",
+        "comms_system",
+        "mounted_gun"
+      ]
+    }
+  },
+  "damage": {
+    "levels": [
+      "no_visible_damage",
+      "possible_damage",
+      "severe_visible_damage",
+      "unobservable"
+    ],
+    "component_groups": {
+      "mobility": {
+        "civilian_parts": ["wheel"],
+        "military_parts": ["wheel", "track"]
+      },
+      "structure": {
+        "civilian_parts": [
+          "back_bumper",
+          "back_door",
+          "back_glass",
+          "back_left_door",
+          "back_right_door",
+          "front_bumper",
+          "front_door",
+          "front_glass",
+          "front_left_door",
+          "front_right_door",
+          "hood",
+          "tailgate",
+          "trunk"
+        ],
+        "military_parts": ["windshield", "hull"]
+      },
+      "mission_equipment": {
+        "civilian_parts": [],
+        "military_parts": ["comms_system", "mounted_gun"]
+      }
+    },
+    "visible_cues": [
+      "deformation",
+      "missing_material",
+      "scorch",
+      "smoke",
+      "flame",
+      "debris"
+    ]
+  }
+}

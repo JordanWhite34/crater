@@ -10,19 +10,23 @@ class Exp(YOLOXExp):
     def __init__(self):
         super().__init__()
 
-        project_root = Path(__file__).resolve().parents[1]
+        project_root = Path(__file__).resolve().parents[2]
 
         self.depth = 0.33
         self.width = 0.50
         self.num_classes = 23
 
-        self.data_dir = str(project_root)
+        self.data_dir = str(
+            project_root / "datasets" / "civilian" / "carparts23"
+        )
         self.train_ann = "carparts23_instances_train.json"
         self.val_ann = "carparts23_instances_val.json"
         self.test_ann = "carparts23_instances_test.json"
 
         self.exp_name = Path(__file__).stem
-        self.output_dir = str(project_root / "outputs" / "yolox")
+        self.output_dir = str(
+            project_root / "outputs" / "detection" / "civilian"
+        )
 
     def get_dataset(self, cache=False, cache_type="ram"):
         return COCODataset(

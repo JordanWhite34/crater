@@ -1,4 +1,4 @@
-"""Portable COCO evaluation for YOLOX experiments.
+"""Portable COCO evaluation for CRATER YOLOX experiments.
 
 YOLOX's default evaluator prefers a JIT-compiled C++ implementation. This
 subclass keeps the same YOLOX evaluation pipeline while using pycocotools'

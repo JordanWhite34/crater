@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a leakage-resistant COCO starter dataset for CRATER.
+"""Build the leakage-resistant COCO Carparts23 dataset for CRATER.
 
 The input is Ultralytics' packaged Carparts-Seg v4 archive after extraction.
 The script:

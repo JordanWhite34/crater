@@ -1,12 +1,10 @@
 # Dataset artifacts (keep the repository lightweight and reproducible).
-images/
-annotations/
-manifests/
-audit/
+/datasets/*
+!/datasets/README.md
 
 # Model inputs and generated training artifacts.
-weights/
-outputs/
+/weights/
+/outputs/
 cache_*/
 
 # Python-generated files and local environments.
