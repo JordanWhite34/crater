@@ -1,7 +1,9 @@
 # Dataset layout
 
-Datasets are local, ignored artifacts. Keep each domain and learning task
-separate:
+Datasets are ignored by default. Keep each domain and learning task separate.
+The Humvee source comparison export is an explicit versioned exception: its
+images use Git LFS, while its COCO JSON, integrity manifest, and documentation
+use normal Git.
 
 ```text
 datasets/
@@ -16,8 +18,14 @@ datasets/
       labels.csv
   military/
     components/
+      README.md
+      source/
+        humvee/                 # immutable source export; not training-ready
+          instances_default.json
+          source_manifest.csv   # tracked integrity/provenance inventory
+          commons_*.{jpg,png}
       images/{train,val,test}/
-      annotations/
+      annotations/             # task-specific prepared COCO split files
       manifests/
     damage/
       images/{train,val,test}/
@@ -27,6 +35,13 @@ datasets/
 Detection annotations use COCO bounding boxes. Damage data contains component
 crops and classification labels; it must not be mixed into detector annotation
 files.
+
+Keep received datasets intact under `source/`. Only deliberately approved
+source datasets should be exempted from the default ignore rule. A preparation
+step must validate provenance, establish the experiment taxonomy, assign
+grouped train/validation/test splits, and write the prepared `images/`,
+`annotations/`, and `manifests/` artifacts. Training experiments consume only
+those prepared artifacts, never a source export directly.
 
 Create the reproducible civilian detector data with:
 

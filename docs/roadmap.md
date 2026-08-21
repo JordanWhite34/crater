@@ -1,6 +1,6 @@
 # CRATER roadmap
 
-Updated: August 11, 2026
+Updated: August 21, 2026
 
 ## Stage 1: civilian detector pretraining
 
@@ -18,10 +18,18 @@ Deliverable: versioned civilian detector checkpoint with reproducible metrics.
 
 ## Stage 2: military component detection
 
-Status: experiment scaffolded; dataset required.
+Status: experiment scaffolded; first Humvee source export received but not yet
+training-ready.
 
-- Collect licensed low-altitude oblique/aerial military vehicle images.
-- Annotate the six classes from `configs/taxonomy.json` using the military guide.
+- Record source/license and grouping metadata for the received 224-image
+  Humvee export; continue collecting other military vehicle families.
+- Preserve the six received labels for the controlled Humvee comparison; do
+  not silently remap them to the canonical CRATER taxonomy.
+- Create leakage-resistant training, validation, and test splits.
+- Run the controlled random-versus-Carparts initialization notebook using the
+  received export taxonomy; treat image-level split results as exploratory.
+- Treat a later canonical CRATER six-class dataset as a separate annotation
+  effort governed by `configs/taxonomy.json` and the military guide.
 - Group source assets and near-duplicates before splitting.
 - Initialize `yolox_s_crater6.py` from the selected civilian checkpoint.
 - Evaluate by class, family, viewpoint, size, and visibility.

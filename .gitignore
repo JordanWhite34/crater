@@ -1,6 +1,19 @@
-# Dataset artifacts (keep the repository lightweight and reproducible).
-/datasets/*
-!/datasets/README.md
+# Dataset artifacts are ignored by default.
+# Track documentation and manifests, plus explicit versioned source datasets.
+/datasets/**
+!/datasets/**/
+!/datasets/**/README.md
+!/datasets/**/source_manifest.csv
+!/datasets/military/components/source/humvee/*.jpg
+!/datasets/military/components/source/humvee/*.png
+!/datasets/military/components/source/humvee/instances_default.json
+
+# Legacy civilian dataset artifacts from before the datasets/ reorganization.
+/images/
+/annotations/
+/manifests/
+/audit/
+/.tmp_download_test/
 
 # Model inputs and generated training artifacts.
 /weights/

@@ -25,7 +25,8 @@ experiments, metrics, and checkpoints separate makes failures attributable.
 - The leakage-resistant civilian Carparts23 dataset preparation is complete.
 - The 23-class YOLOX-S scratch baseline is complete: validation COCO AP50:95
   `0.422` and AP50 `0.642` after 100 epochs.
-- The six-class military detector experiment is ready for data.
+- A first unsplit Humvee component export is staged with its source taxonomy;
+  provenance and grouped splits remain before military fine-tuning.
 - Civilian and military damage-classification datasets are not yet built.
 
 The scratch checkpoint is retained for comparison. The recommended transfer
@@ -38,7 +39,7 @@ checkpoint.
 ```text
 configs/
   taxonomy.json                 canonical classes, damage levels, and groups
-datasets/                       ignored local datasets; see datasets/README.md
+datasets/                       ignored by default; selected sources use LFS
 docs/
   architecture.md               stage boundaries and evaluation policy
   roadmap.md                    work sequence and deliverables

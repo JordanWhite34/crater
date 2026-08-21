@@ -10,6 +10,18 @@ This directory contains the two-stage component detector lineage:
 Both use the pinned YOLOX implementation in `third_party/YOLOX`. The local
 `standard_coco_evaluator.py` keeps COCO evaluation portable on Windows.
 
+## Humvee initialization comparison
+
+`humvee_initialization_comparison.ipynb` is an intentionally unrun, guarded
+training notebook for the received Humvee export. It discovers the six source
+classes directly from `instances_default.json` and compares the same YOLOX-S
+configuration from random weights and from a Carparts-trained checkpoint.
+
+The notebook defaults to an exploratory image-level split because source-group
+metadata is not populated yet. Validation results from that split must not be
+treated as leakage-resistant release metrics. Set the checkpoint path and the
+explicit training safety switch in the parameter cell before running it.
+
 ## Civilian pretraining
 
 ```powershell

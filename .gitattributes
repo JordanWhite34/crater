@@ -1,0 +1,2 @@
+datasets/military/components/source/humvee/*.jpg filter=lfs diff=lfs merge=lfs -text
+datasets/military/components/source/humvee/*.png filter=lfs diff=lfs merge=lfs -text
