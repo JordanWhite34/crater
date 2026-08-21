@@ -10,7 +10,27 @@ This directory contains the two-stage component detector lineage:
 Both use the pinned YOLOX implementation in `third_party/YOLOX`. The local
 `standard_coco_evaluator.py` keeps COCO evaluation portable on Windows.
 
-## Civilian pretraining
+## Current results
+
+Both civilian runs completed for 100 epochs on the same leakage-resistant
+train/validation split and schedule:
+
+| Initialization | Validation AP50:95 | Validation AP50 |
+| --- | ---: | ---: |
+| Scratch | 0.422 | 0.642 |
+| Official YOLOX-S COCO weights | **0.546** | **0.688** |
+
+The COCO-initialized checkpoint achieved held-out test AP50:95 `0.580`, AP50
+`0.737`, AP75 `0.675`, and AR100 `0.779`. It is promoted as
+`carparts23-yolox-s-coco-v1`; use that version as the parent for military
+fine-tuning. The `object` class is a documented dataset limitation with 5 train,
+2 validation, and 0 test instances. Full lineage and per-class results are in
+the [Stage 1 report](../../docs/reports/carparts23-stage1.md).
+
+Generated runs and the promoted checkpoint live under
+`outputs/detection/civilian/` and are intentionally ignored by Git.
+
+## Reproduce civilian pretraining
 
 ```powershell
 python third_party\YOLOX\tools\train.py `
@@ -23,7 +43,7 @@ python third_party\YOLOX\tools\train.py `
 
 ## Military fine-tuning
 
-After creating `datasets/military/components`, initialize from the selected
+After creating `datasets/military/components`, initialize from the promoted
 civilian checkpoint:
 
 ```powershell
@@ -31,7 +51,7 @@ python third_party\YOLOX\tools\train.py `
   -f experiments\detection\yolox_s_crater6.py `
   -expn yolox_s_crater6_finetune `
   -d 1 -b 8 --fp16 `
-  -c outputs\detection\civilian\<civilian-run>\best_ckpt.pth
+  -c outputs\detection\civilian\promoted\carparts23-yolox-s-coco-v1\carparts23-yolox-s-coco-v1.pth
 ```
 
 YOLOX skips the incompatible 23-class prediction tensors and loads the shared
