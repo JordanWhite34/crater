@@ -4,15 +4,22 @@ Updated: August 21, 2026
 
 ## Stage 1: civilian detector pretraining
 
-Status: baseline complete; pretrained comparison remains.
+Status: complete; `carparts23-yolox-s-coco-v1` promoted.
 
-- Reproduce the prepared 23-class Carparts23 data.
-- Retain the completed YOLOX-S scratch run as a baseline.
-- Train YOLOX-S from official COCO initialization under the same split and
-  schedule.
-- Select between scratch and pretrained runs using validation AP and per-class
-  behavior; evaluate the selected model once on the civilian test split.
-- Save the parent checkpoint and a concise error-analysis report.
+- Completed: reproduced the prepared 23-class Carparts23 data.
+- Completed: trained the 100-epoch YOLOX-S scratch baseline (validation
+  AP50:95 `0.422`, AP50 `0.642`).
+- Completed: trained YOLOX-S from official COCO initialization under the same
+  split and schedule (validation AP50:95 `0.546`, AP50 `0.688`).
+- Completed: selected the COCO-initialized run based on its validation
+  AP50:95 improvement of `0.124` over scratch. Most classes improved, but the
+  `object` class remained at zero AP.
+- Completed: evaluated the selected checkpoint once on the held-out test split
+  (AP50:95 `0.580`, AP50 `0.737`, AR100 `0.779`).
+- Completed: promoted the versioned parent checkpoint with data/split lineage
+  and a [per-class error-analysis report](reports/carparts23-stage1.md).
+- Known limitation: `object` has 5 train, 2 validation, and 0 test instances;
+  defer its removal or relabeling to a versioned dataset/model change.
 
 Deliverable: versioned civilian detector checkpoint with reproducible metrics.
 
@@ -26,8 +33,9 @@ training-ready.
 - Preserve the six received labels for the controlled Humvee comparison; do
   not silently remap them to the canonical CRATER taxonomy.
 - Create leakage-resistant training, validation, and test splits.
-- Run the controlled random-versus-Carparts initialization notebook using the
-  received export taxonomy; treat image-level split results as exploratory.
+- Run the controlled random-versus-`carparts23-yolox-s-coco-v1`
+  initialization notebook using the received export taxonomy; treat
+  image-level split results as exploratory.
 - Treat a later canonical CRATER six-class dataset as a separate annotation
   effort governed by `configs/taxonomy.json` and the military guide.
 - Group source assets and near-duplicates before splitting.

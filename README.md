@@ -23,16 +23,25 @@ experiments, metrics, and checkpoints separate makes failures attributable.
 ## Current status
 
 - The leakage-resistant civilian Carparts23 dataset preparation is complete.
-- The 23-class YOLOX-S scratch baseline is complete: validation COCO AP50:95
-  `0.422` and AP50 `0.642` after 100 epochs.
+- Both 100-epoch civilian YOLOX-S runs are complete. The scratch baseline
+  reached validation COCO AP50:95 `0.422` and AP50 `0.642`; the run initialized
+  from official YOLOX-S COCO weights reached AP50:95 `0.546` and AP50 `0.688`.
+- The COCO-initialized checkpoint is promoted as
+  `carparts23-yolox-s-coco-v1`. Held-out test COCO AP50:95 is `0.580`, AP50 is
+  `0.737`, and AR100 is `0.779`; see the
+  [Stage 1 detector report](docs/reports/carparts23-stage1.md).
+- The `object` class is a known dataset limitation: 5 train instances, 2
+  validation instances, and no test instances. It remains only for checkpoint
+  compatibility and should be removed or relabeled in a future dataset version.
 - A first unsplit Humvee component export is staged with its source taxonomy;
   provenance and grouped splits remain before military fine-tuning.
 - Civilian and military damage-classification datasets are not yet built.
 
-The scratch checkpoint is retained for comparison. The recommended transfer
-lineage is a second civilian run initialized from official YOLOX-S COCO weights,
-followed by military fine-tuning from the better validation-selected civilian
-checkpoint.
+The scratch checkpoint is retained for comparison. The required transfer
+lineage is the promoted COCO-initialized civilian checkpoint followed by
+military fine-tuning. Generated civilian datasets, checkpoints, logs, and
+outputs remain ignored local artifacts. The approved Humvee source images are
+the explicit exception and are versioned through Git LFS.
 
 ## Repository map
 
@@ -44,6 +53,7 @@ docs/
   architecture.md               stage boundaries and evaluation policy
   roadmap.md                    work sequence and deliverables
   annotation/                   military component and damage-label rules
+  reports/                      versioned stage results and evidence tables
 experiments/
   detection/                    civilian pretraining and military fine-tuning
   damage/                       crop-classification experiment contract
