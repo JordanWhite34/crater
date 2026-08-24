@@ -44,7 +44,7 @@ the relationship for context, not as an automatic mapping:
 Do not relabel `door` or `engine_bay` as `hull` or `track`. A Humvee has no
 track instances, and those boxes do not establish the canonical `hull` extent.
 
-## Preparation gates
+## Release-quality preparation gates
 
 Before fine-tuning:
 
@@ -53,11 +53,14 @@ Before fine-tuning:
 2. Preserve the source categories for this comparison and review the three
    images with no boxes as intentional negatives or annotation omissions.
 3. Split by source asset, scene, vehicle, and sequence before any augmentation.
-4. Generate `annotations/humvee_source6_instances_{train,val,test}.json` and
-   split manifests that point back to the versioned source images.
+4. Generate `annotations/humvee_source6_instances_{train,val,test}.json` files
+   that point back to the versioned source images.
 5. Validate image references, box bounds, category IDs, class coverage, and
    cross-split leakage before launching training.
 
-The comparison notebook materializes that prepared contract without changing
-the source export. A later canonical CRATER detector is a separate annotation
-and experiment lineage.
+The comparison notebook applies an interim leakage-resistant grouping based on
+Commons upload sequences plus visually confirmed photo-series links. It checks
+that no group crosses splits without changing the source export. Authoritative
+provenance fields are still required before treating results as release-quality.
+A later canonical CRATER detector is a separate annotation and experiment
+lineage.

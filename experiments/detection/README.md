@@ -12,17 +12,17 @@ Both use the pinned YOLOX implementation in `third_party/YOLOX`. The local
 
 ## Humvee initialization comparison
 
-`humvee_initialization_comparison.ipynb` is an intentionally unrun, guarded
-training notebook for the received Humvee export. It discovers the six source
-classes directly from `instances_default.json` and compares the same YOLOX-S
-configuration from random weights and from the promoted
-`carparts23-yolox-s-coco-v1` checkpoint.
+`humvee_initialization_comparison.ipynb` is an intentionally unrun training
+notebook for the received Humvee export. It creates a deterministic group-aware
+split and launches the standard YOLOX trainer twice: once from random weights
+and once from the promoted `carparts23-yolox-s-coco-v1` checkpoint.
 
-The notebook defaults to an exploratory image-level split because source-group
-metadata is not populated yet. Validation results from that split must not be
-treated as leakage-resistant release metrics. The notebook pins the promoted
-checkpoint's reported local path and SHA-256, but the ignored checkpoint binary
-must be restored locally before enabling the explicit training safety switch.
+The split keeps related Commons upload sequences and visually confirmed photo
+series together. Its automated check rejects any group crossing train,
+validation, and test. Because authoritative source/scene/vehicle metadata is
+still missing, this remains an exploratory comparison rather than a
+release-quality benchmark. The notebook also verifies the promoted checkpoint's
+local path and SHA-256 before starting either run.
 
 ## Current results
 

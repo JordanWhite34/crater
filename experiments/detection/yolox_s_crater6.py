@@ -19,6 +19,7 @@ class Exp(YOLOXExp):
         self.depth = 0.33
         self.width = 0.50
         self.num_classes = 6
+        self.seed = 42
 
         self.data_dir = str(
             project_root / "datasets" / "military" / "components"
