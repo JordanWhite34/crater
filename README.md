@@ -33,15 +33,26 @@ experiments, metrics, and checkpoints separate makes failures attributable.
 - The `object` class is a known dataset limitation: 5 train instances, 2
   validation instances, and no test instances. It remains only for checkpoint
   compatibility and should be removed or relabeled in a future dataset version.
-- A first unsplit Humvee component export is staged with its source taxonomy;
-  provenance and grouped splits remain before military fine-tuning.
-- Civilian and military damage-classification datasets are not yet built.
+- The exploratory Humvee initialization comparison is complete on the received
+  224-image, six-label source export. Under the same 100-epoch schedule, scratch
+  initialization reached validation AP50:95 `0.1297`; initialization from
+  `carparts23-yolox-s-coco-v1` reached `0.4784`, an absolute gain of `0.3487`.
+  See the [Humvee comparison report](docs/reports/humvee-source6-initialization-comparison.md).
+- The Humvee result is transfer evidence, not a release-quality military model.
+  The split uses interim photo-series grouping, authoritative provenance is
+  incomplete, the received labels are not the canonical CRATER taxonomy, and a
+  full held-out test evaluation and versioned checkpoint promotion remain.
+- A 16-image military damage-labeling pilot has generated detector-derived
+  crops and review sheets. Human crop labels have not been completed, and no
+  civilian or military damage classifier has been trained.
 
 The scratch checkpoint is retained for comparison. The required transfer
 lineage is the promoted COCO-initialized civilian checkpoint followed by
-military fine-tuning. Generated civilian datasets, checkpoints, logs, and
-outputs remain ignored local artifacts. The approved Humvee source images are
-the explicit exception and are versioned through Git LFS.
+military fine-tuning. Generated datasets, checkpoints, logs, annotation runs,
+and outputs remain ignored local artifacts. The approved Humvee source images
+are the explicit exception and are versioned through Git LFS. The exploratory
+Humvee run outputs must be restored or reproduced before downstream work; the
+executed notebook records their results but does not version the checkpoints.
 
 ## Repository map
 
@@ -96,6 +107,7 @@ For the military fine-tuning command and expected dataset contract, see
 
 ```text
 outputs/detection/civilian/<run>/
+outputs/detection/humvee_source6/<run>/    exploratory received-taxonomy runs
 outputs/detection/military/<run>/
 outputs/damage/civilian/<run>/
 outputs/damage/military/<run>/

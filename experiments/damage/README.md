@@ -40,6 +40,13 @@ to cover wheeled mobility, tracked mobility, structure, communications, and
 mounted weapons. The exact Commons pages, licenses, hashes, and selection
 rationale are preserved in the subset manifest.
 
+The pilot has been executed through detector inference, crop export, and review
+sheet generation. It produced three mobility pages, two structure pages, and
+one mission-equipment page. The human label uploads and final validation/split
+cell remain unexecuted, so there is no validated damage dataset or trained
+damage classifier yet. Generated annotation-run assets are ignored and must be
+restored or reproduced when continuing the pilot.
+
 Each run is written under
 `datasets/military/damage/annotation_runs/predicted_crops/<run_name>/` and
 contains clean crops, a provenance manifest, contact sheets, and one blank

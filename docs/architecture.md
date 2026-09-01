@@ -18,6 +18,12 @@ weight from the selected civilian detector and fine-tune on military imagery.
 Measure performance by component, vehicle family, viewpoint, object size, and
 visibility. Record the exact civilian parent checkpoint in every military run.
 
+The received Humvee source-label comparison is an intermediate transfer
+experiment, not this canonical detector. Its labels include `door` and
+`engine_bay` and omit canonical `track` and `hull` coverage. Keep its data,
+metrics, and checkpoints in a separate lineage; do not rename source labels to
+make the exploratory result appear canonical.
+
 ## 3. Damage classifiers
 
 The detector yields component boxes. A crop generator turns a ground-truth or

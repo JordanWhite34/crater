@@ -1,6 +1,6 @@
 # CRATER roadmap
 
-Updated: August 21, 2026
+Updated: September 1, 2026
 
 ## Stage 1: civilian detector pretraining
 
@@ -25,28 +25,40 @@ Deliverable: versioned civilian detector checkpoint with reproducible metrics.
 
 ## Stage 2: military component detection
 
-Status: experiment scaffolded; first Humvee source export received but not yet
-training-ready.
+Status: exploratory initialization comparison complete; release-quality
+dataset, evaluation, and model promotion remain.
 
-- Record source/license and grouping metadata for the received 224-image
-  Humvee export; continue collecting other military vehicle families.
-- Preserve the six received labels for the controlled Humvee comparison; do
-  not silently remap them to the canonical CRATER taxonomy.
-- Create leakage-resistant training, validation, and test splits.
-- Run the controlled random-versus-`carparts23-yolox-s-coco-v1`
-  initialization notebook using the received export taxonomy; treat
-  image-level split results as exploratory.
+- Completed: preserved the 224-image, 2,226-box source export and its six
+  received labels without silently remapping them to canonical CRATER classes.
+- Completed: created a deterministic interim photo-series split with 156 train,
+  34 validation, and 34 test images across 116 groups; the automated check
+  found no group crossing splits.
+- Completed: ran matched 100-epoch scratch and
+  `carparts23-yolox-s-coco-v1`-initialized experiments. Validation AP50:95 was
+  `0.1297` from scratch and `0.4784` from the civilian checkpoint, a `0.3487`
+  absolute improvement. The initialized run is selected for pilot inference.
+- Completed: visually smoke-tested the selected checkpoint on three test-split
+  images after selection. This is not a full quantitative test evaluation.
+- Pending: restore or reproduce the selected checkpoint, record its SHA-256 and
+  complete run lineage, and preserve it with the experiment evidence.
+- Pending: record authoritative source URL, license, vehicle/scene identity,
+  and near-duplicate grouping metadata; review the three images without boxes.
+- Pending: run one fixed aggregate held-out test evaluation and publish
+  per-class, viewpoint, size, and visibility error analysis.
+- Pending: continue collecting other military vehicle families.
 - Treat a later canonical CRATER six-class dataset as a separate annotation
   effort governed by `configs/taxonomy.json` and the military guide.
-- Group source assets and near-duplicates before splitting.
-- Initialize `yolox_s_crater6.py` from the selected civilian checkpoint.
-- Evaluate by class, family, viewpoint, size, and visibility.
 
-Deliverable: six-class military detector and error-analysis report.
+Current evidence: the civilian checkpoint materially improves exploratory
+Humvee validation performance; see the
+[initialization comparison report](reports/humvee-source6-initialization-comparison.md).
+
+Deliverable: provenance-complete canonical six-class military detector,
+versioned checkpoint, and error-analysis report.
 
 ## Stage 3: civilian damage classification
 
-Status: data contract defined; dataset and training code required.
+Status: data contract defined; source dataset and training code required.
 
 - Source civilian damaged and undamaged vehicle-part imagery with provenance.
 - Split source images first, then create ground-truth component crops.
@@ -59,9 +71,14 @@ Deliverable: civilian crop-classifier checkpoints and calibrated metrics.
 
 ## Stage 4: military damage fine-tuning
 
-Status: blocked on military damage crops.
+Status: crop-generation pilot complete; validated labels and a training-scale
+military damage dataset remain blocked on human review and additional data.
 
-- Generate military crops without crossing source splits.
+- Completed: built the detector-driven crop annotation workflow and ran its
+  16-image pilot through crop and contact-sheet generation.
+- Pending: complete and validate the three human label uploads; the final label
+  and prepared-split notebook cell has not run.
+- Generate a larger military crop dataset without crossing source splits.
 - Fine-tune compatible civilian damage checkpoints.
 - Train mission-equipment damage directly on military data.
 - Compare civilian initialization against training from scratch.
