@@ -1,0 +1,96 @@
+{
+  "box_count": 2240,
+  "canonical_damage_level_counts": {
+    "no_visible_damage": 2135,
+    "possible_damage": 32,
+    "severe_visible_damage": 42,
+    "unobservable": 31
+  },
+  "class_counts": {
+    "comms_equipment": 205,
+    "door": 418,
+    "engine_bay": 269,
+    "weapon_station": 258,
+    "wheel_tire": 808,
+    "windshield": 282
+  },
+  "class_damage_counts": {
+    "comms_equipment": {
+      "no_visible_damage": 205
+    },
+    "door": {
+      "no_visible_damage": 395,
+      "possible_damage": 18,
+      "severe_visible_damage": 5
+    },
+    "engine_bay": {
+      "no_visible_damage": 256,
+      "possible_damage": 6,
+      "severe_visible_damage": 5,
+      "unobservable": 2
+    },
+    "weapon_station": {
+      "no_visible_damage": 255,
+      "possible_damage": 2,
+      "severe_visible_damage": 1
+    },
+    "wheel_tire": {
+      "no_visible_damage": 753,
+      "possible_damage": 4,
+      "severe_visible_damage": 22,
+      "unobservable": 29
+    },
+    "windshield": {
+      "no_visible_damage": 271,
+      "possible_damage": 2,
+      "severe_visible_damage": 9
+    }
+  },
+  "class_mapping": {
+    "weapons_station": "weapon_station"
+  },
+  "component_box_comparison": {
+    "current_box_count": 2240,
+    "exact_added_or_adjusted_box_count": 30,
+    "exact_removed_or_adjusted_box_count": 16,
+    "exact_unchanged_box_count": 2210,
+    "previous_box_count": 2226
+  },
+  "cvat_dumped": "2026-09-01 18:40:51.922698+00:00",
+  "cvat_job_or_task_id": "4366557",
+  "cvat_metadata_kind": "job",
+  "cvat_mode": "annotation",
+  "cvat_updated": "2026-08-27 16:01:47.837984+00:00",
+  "cvat_version": "1.1",
+  "damage_box_annotations_sha256": "5247eccca4cbe9aee3225302894fe9c501778c9c771784a5c5ff40caacff4442",
+  "damage_mapping": {
+    "degraded": "possible_damage",
+    "destroyed": "severe_visible_damage",
+    "intact": "no_visible_damage",
+    "unknown": "unobservable"
+  },
+  "dataset_version": "humvee-cvat-damage-v1",
+  "empty_image_count": 2,
+  "image_count": 224,
+  "original_export_container": "job_4366557_annotations_2026_08_27_16_01_47_cvat for images 1.1",
+  "original_export_filename": "annotations.xml",
+  "original_export_sha256": "93ea8863bd489104017381a742c6545834b3174877f8330626523c772b8d574a",
+  "privacy_sanitization": [
+    "removed CVAT owner metadata",
+    "removed CVAT assignee metadata",
+    "removed CVAT segment URL"
+  ],
+  "sanitized_annotations_sha256": "14084d0b1ab0c0b2d3ea0ec971b0c6b480baef26cf545c344a51c2128e0c8c51",
+  "schema_version": 1,
+  "semantic_review_note": "CVAT defines intact as the default attribute value; the export cannot distinguish explicitly confirmed intact boxes from untouched defaults.",
+  "source_component_annotations_sha256": "6cf31604cb44c214f0e36effddccc53047b1b016d16c2a6289fee0a671a54637",
+  "source_damage_state_counts": {
+    "degraded": 32,
+    "destroyed": 42,
+    "intact": 2135,
+    "unknown": 31
+  },
+  "source_manifest_sha256": "991a6c2acfb7aa38ed33162b3b77a1bcdb87d2236e3750a333623c6c99a66b75",
+  "split_status": "unassigned_pending_authoritative_source_grouping",
+  "status": "validated_source_inventory_not_training_ready"
+}

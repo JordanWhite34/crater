@@ -3,22 +3,54 @@
 This directory stages component-damage classification data separately from the
 military component detector export.
 
-## Synthetic pilot
+## Human Humvee damage boxes
 
-`source/synthetic_humvee/` contains image-generation edits derived from the
-immutable Humvee component source images. These are candidate training assets,
-not ground truth. Review every image for edit locality, component identity,
-damage-label fit, and generation artifacts before admitting it to a prepared
-split.
+`source/humvee_cvat_damage_v1/` is the validated CVAT for images 1.1 export for
+the 224 versioned Humvee source images. It contains 2,240 manual component boxes
+and a human `damage_state` attribute on every box. The import preserves the
+received values and adds a canonical mapping:
 
-The current pilot contains 30 full images: two source scenes for each of
-`windshield`, `wheel_tire`, `weapon_station`, `engine_bay`, and `door`, with
-`no_visible_damage`, `possible_damage`, and `severe_visible_damage` versions
-for each scene.
+| Source value | CRATER level | Count |
+| --- | --- | ---: |
+| `intact` | `no_visible_damage` | 2,135 |
+| `degraded` | `possible_damage` | 32 |
+| `destroyed` | `severe_visible_damage` | 42 |
+| `unknown` | `unobservable` | 31 |
 
-All variants derived from one source image must inherit the same split and
-group ID. Never split an original and its generated variants across train,
-validation, or test.
+The source is usable for ground-truth crop generation after grouped splits are
+assigned. It is not yet training-ready: provenance grouping remains incomplete,
+damage labels are highly imbalanced, and all 205 communications-equipment boxes
+are currently intact. Do not mix its ground-truth boxes with the separate
+detector-predicted crop pilot.
+
+Because `intact` was CVAT's default attribute value, the file format alone
+cannot prove that every intact box was actively reviewed. Confirm that semantic
+QA before using the intact population as classifier ground truth.
+
+Reproduce the validated, privacy-sanitized source inventory with
+`tools/data/import_cvat_damage_annotations.py`. The importer verifies all 224
+source-image hashes before writing the canonical CSV.
+
+## Synthetic Humvee damage source
+
+`source/synthetic_humvee_damage_v1/` contains 30 independently generated
+text-to-image HMMWV scenes and 251 human CVAT component boxes. Every box has an
+`intact`, `degraded`, `destroyed`, or `unknown` attribute, mapped through the
+same canonical contract as the real Humvee source. The images, sanitized XML,
+box CSV, source manifest, and import manifest are versioned; PNGs use Git LFS.
+
+This is a validated source inventory, not a prepared dataset. The labels are
+74.9% intact, and communications equipment has 13 intact boxes, one degraded
+box, and no destroyed boxes. Generation-prompt intent is retained only as
+provenance because requested damage is not guaranteed to appear or be visibly
+boxable. Review component identity, box fit, damage-state fit, and generation
+artifacts before admitting any crop to training.
+
+These are independent generations rather than edits of real source images, so
+they have no real-image parent. Keep them out of validation and test data, and
+retain their synthetic-domain and generation-group fields in every derivative.
+See the [source README](source/synthetic_humvee_damage_v1/README.md) for the
+verified counts and reproduction command.
 
 ## Wikimedia Commons candidate catalog
 

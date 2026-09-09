@@ -1,0 +1,102 @@
+{
+  "box_count": 251,
+  "canonical_damage_level_counts": {
+    "no_visible_damage": 188,
+    "possible_damage": 22,
+    "severe_visible_damage": 31,
+    "unobservable": 10
+  },
+  "class_counts": {
+    "comms_equipment": 14,
+    "door": 60,
+    "engine_bay": 31,
+    "weapon_station": 28,
+    "wheel_tire": 88,
+    "windshield": 30
+  },
+  "class_damage_counts": {
+    "comms_equipment": {
+      "no_visible_damage": 13,
+      "possible_damage": 1
+    },
+    "door": {
+      "no_visible_damage": 50,
+      "possible_damage": 5,
+      "severe_visible_damage": 5
+    },
+    "engine_bay": {
+      "no_visible_damage": 23,
+      "possible_damage": 2,
+      "severe_visible_damage": 6
+    },
+    "weapon_station": {
+      "no_visible_damage": 22,
+      "possible_damage": 1,
+      "severe_visible_damage": 5
+    },
+    "wheel_tire": {
+      "no_visible_damage": 59,
+      "possible_damage": 9,
+      "severe_visible_damage": 10,
+      "unobservable": 10
+    },
+    "windshield": {
+      "no_visible_damage": 21,
+      "possible_damage": 4,
+      "severe_visible_damage": 5
+    }
+  },
+  "class_mapping": {
+    "weapons_station": "weapon_station"
+  },
+  "cvat_dumped": "2026-09-01 21:15:01.836219+00:00",
+  "cvat_job_or_task_id": "2559206",
+  "cvat_metadata_kind": "task",
+  "cvat_mode": "annotation",
+  "cvat_updated": "2026-09-01 21:13:49.886507+00:00",
+  "cvat_version": "1.1",
+  "damage_box_annotations_sha256": "bc6d616ee6cdb613d940a44a277ed7faf44a4f3c3a3b67c673c7a2b94fccf325",
+  "damage_mapping": {
+    "degraded": "possible_damage",
+    "destroyed": "severe_visible_damage",
+    "intact": "no_visible_damage",
+    "unknown": "unobservable"
+  },
+  "dataset_version": "synthetic-humvee-damage-v1",
+  "domain": "synthetic",
+  "empty_image_count": 0,
+  "evaluation_policy": "exclude synthetic images from validation and test sets",
+  "generation_session_id": "01a04411-3958-7240-9f6b-677f4af4af60",
+  "generator": "OpenAI image generation tool",
+  "generator_model": "not recorded",
+  "image_count": 30,
+  "image_dimensions": {
+    "1499x1049": 1,
+    "1536x1024": 28,
+    "1628x966": 1
+  },
+  "original_export_filename": "annotations.xml",
+  "original_export_sha256": "ec6f828c8cc8af82bdda816af305c792aec95b7d24dba8d964cb9e794414a584",
+  "privacy_sanitization": [
+    "removed CVAT owner metadata",
+    "removed CVAT assignee metadata",
+    "removed CVAT segment URL"
+  ],
+  "prompt_label_policy": "Intended generation conditions are provenance only; human CVAT damage attributes are the sole training-label source.",
+  "sanitized_annotations_sha256": "952d98bcd56d3f1e9b73e0d7fdb2736c7ba953694cdcb76e1ec82f3778106807",
+  "schema_version": 1,
+  "semantic_review_note": "CVAT defines intact as the default attribute value; the export cannot distinguish explicitly confirmed intact boxes from untouched defaults.",
+  "source_damage_state_counts": {
+    "degraded": 22,
+    "destroyed": 31,
+    "intact": 188,
+    "unknown": 10
+  },
+  "source_image_count": 30,
+  "source_image_total_bytes": 77564902,
+  "source_image_unique_sha256_count": 30,
+  "source_manifest_sha256": "7de40d1a78f977d3c9911ae17808e91a85a1c0095242a3361614b534e9b17fdf",
+  "source_type": "text_to_image",
+  "split_status": "unassigned_training_only_candidate",
+  "status": "validated_synthetic_source_inventory_not_training_ready"
+}

@@ -7,6 +7,14 @@
 !/datasets/military/components/source/humvee/*.jpg
 !/datasets/military/components/source/humvee/*.png
 !/datasets/military/components/source/humvee/instances_default.json
+!/datasets/military/damage/source/humvee_cvat_damage_v1/annotations.xml
+!/datasets/military/damage/source/humvee_cvat_damage_v1/damage_box_annotations.csv
+!/datasets/military/damage/source/humvee_cvat_damage_v1/import_manifest.json
+!/datasets/military/damage/source/synthetic_humvee_damage_v1/annotations.xml
+!/datasets/military/damage/source/synthetic_humvee_damage_v1/damage_box_annotations.csv
+!/datasets/military/damage/source/synthetic_humvee_damage_v1/import_manifest.json
+!/datasets/military/damage/source/synthetic_humvee_damage_v1/images/
+!/datasets/military/damage/source/synthetic_humvee_damage_v1/images/*.png
 
 # Legacy civilian dataset artifacts from before the datasets/ reorganization.
 /images/
@@ -18,6 +26,9 @@
 # Model inputs and generated training artifacts.
 /weights/
 /outputs/
+# Keep trained weights on the machine that produced them; commit run metadata.
+/runs/**/*.pt
+/runs/**/*.pth
 cache_*/
 
 # Python-generated files and local environments.

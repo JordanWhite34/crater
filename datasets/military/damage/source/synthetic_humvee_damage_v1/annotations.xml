@@ -1,0 +1,945 @@
+<?xml version='1.0' encoding='utf-8'?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <task>
+      <id>2559206</id>
+      <name>synthetic additions</name>
+      <size>30</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker></bugtracker>
+      <created>2026-09-01 18:33:21.181943+00:00</created>
+      <updated>2026-09-01 21:13:49.886507+00:00</updated>
+      <subset>default</subset>
+      <start_frame>0</start_frame>
+      <stop_frame>29</stop_frame>
+      <frame_filter></frame_filter>
+      <segments>
+        <segment>
+          <id>4430462</id>
+          <start>0</start>
+          <stop>29</stop>
+        </segment>
+      </segments>
+      <labels>
+        <label>
+          <name>wheel_tire</name>
+          <color>#ca9e1c</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>damage_state</name>
+              <mutable>False</mutable>
+              <input_type>radio</input_type>
+              <default_value>intact</default_value>
+              <values>intact
+degraded
+destroyed
+unknown</values>
+            </attribute>
+          </attributes>
+        </label>
+        <label>
+          <name>windshield</name>
+          <color>#01a1a7</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>damage_state</name>
+              <mutable>False</mutable>
+              <input_type>radio</input_type>
+              <default_value>intact</default_value>
+              <values>intact
+degraded
+destroyed
+unknown</values>
+            </attribute>
+          </attributes>
+        </label>
+        <label>
+          <name>engine_bay</name>
+          <color>#5d424c</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>damage_state</name>
+              <mutable>False</mutable>
+              <input_type>radio</input_type>
+              <default_value>intact</default_value>
+              <values>intact
+degraded
+destroyed
+unknown</values>
+            </attribute>
+          </attributes>
+        </label>
+        <label>
+          <name>weapons_station</name>
+          <color>#acfdac</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>damage_state</name>
+              <mutable>False</mutable>
+              <input_type>radio</input_type>
+              <default_value>intact</default_value>
+              <values>intact
+degraded
+destroyed
+unknown</values>
+            </attribute>
+          </attributes>
+        </label>
+        <label>
+          <name>comms_equipment</name>
+          <color>#3df53d</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>damage_state</name>
+              <mutable>False</mutable>
+              <input_type>radio</input_type>
+              <default_value>intact</default_value>
+              <values>intact
+degraded
+destroyed
+unknown</values>
+            </attribute>
+          </attributes>
+        </label>
+        <label>
+          <name>door</name>
+          <color>#2a7dd1</color>
+          <type>any</type>
+          <attributes>
+            <attribute>
+              <name>damage_state</name>
+              <mutable>False</mutable>
+              <input_type>radio</input_type>
+              <default_value>intact</default_value>
+              <values>intact
+degraded
+destroyed
+unknown</values>
+            </attribute>
+          </attributes>
+        </label>
+      </labels>
+    </task>
+    <dumped>2026-09-01 21:15:01.836219+00:00</dumped>
+  </meta>
+  <image id="0" name="exec-0a0b7d16-0de8-43d1-bd03-991938d29339.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="512.42" ytl="637.07" xbr="760.82" ybr="871.17" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1165.60" ytl="519.12" xbr="1334.48" ybr="721.95" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="203.25" ytl="613.83" xbr="355.15" ybr="747.86" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="476.67" ytl="315.39" xbr="865.37" ybr="463.72" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="165.72" ytl="427.08" xbr="856.43" ybr="671.91" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="610.71" ytl="107.19" xbr="1038.71" ybr="294.84" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="886.81" ytl="344.88" xbr="1075.35" ybr="668.34" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1083.81" ytl="339.29" xbr="1234.65" ybr="633.51" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="1" name="exec-0ce2c907-2f6e-4e19-9935-9ec1e14ef7ff.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="320.22" ytl="621.79" xbr="665.12" ybr="968.48" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1167.20" ytl="564.51" xbr="1365.66" ybr="802.28" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="112.91" ytl="689.69" xbr="318.43" ybr="823.73" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="463.18" ytl="334.06" xbr="798.26" ybr="455.59" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="73.60" ytl="459.16" xbr="783.07" ybr="690.59" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="607.93" ytl="108.53" xbr="1048.09" ybr="312.17" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="830.03" ytl="342.74" xbr="1132.31" ybr="803.66" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1037.13" ytl="356.01" xbr="1259.22" ybr="685.98" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="2" name="exec-0df7a36d-2319-49f4-9d86-ebd130b25d3f.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="975.23" ytl="372.34" xbr="1123.48" ybr="730.00" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1135.02" ytl="381.51" xbr="1280.39" ybr="701.15" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="539.69" ytl="645.20" xbr="839.66" ybr="985.55" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="146.84" ytl="675.14" xbr="399.51" ybr="872.49" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1200.78" ytl="579.43" xbr="1366.35" ybr="806.72" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="134.72" ytl="491.75" xbr="923.89" ybr="724.23" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="479.12" ytl="356.76" xbr="930.23" ybr="474.44" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="609.49" ytl="123.70" xbr="1088.29" ybr="340.61" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="3" name="exec-11bc9a67-edc6-499c-9632-b137fd4bb405.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="591.23" ytl="120.95" xbr="1056.76" ybr="325.58" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="468.81" ytl="647.25" xbr="772.62" ybr="967.14" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1145.22" ytl="573.09" xbr="1313.21" ybr="789.32" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="144.46" ytl="650.83" xbr="383.03" ybr="832.22" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="489.36" ytl="343.45" xbr="884.31" ybr="461.39" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="111.39" ytl="468.54" xbr="871.80" ybr="699.08" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="911.07" ytl="358.34" xbr="1082.58" ybr="740.75" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1077.10" ytl="369.31" xbr="1234.15" ybr="708.35" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="4" name="exec-16aa96fa-5269-4ea5-9ecf-e6516adbe73f.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="910.00" ytl="333.91" xbr="1092.75" ybr="682.95" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1100.50" ytl="357.99" xbr="1250.03" ybr="660.54" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="466.76" ytl="601.37" xbr="776.44" ybr="937.31" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1187.29" ytl="549.55" xbr="1356.42" ybr="773.58" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="123.87" ytl="700.99" xbr="367.14" ybr="824.55" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="419.65" ytl="301.73" xbr="484.52" ybr="364.28" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="488.38" ytl="315.63" xbr="874.52" ybr="431.47" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="105.34" ytl="361.19" xbr="859.85" ybr="665.47" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="623.23" ytl="67.43" xbr="1065.09" ybr="297.04" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="5" name="exec-2196d25a-90b2-4d9b-9a5c-f9e5770f49e8.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="627.74" ytl="104.30" xbr="1078.50" ybr="303.83" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="457.03" ytl="617.02" xbr="766.07" ybr="950.75" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1193.92" ytl="578.36" xbr="1381.85" ybr="813.21" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="101.26" ytl="648.86" xbr="357.22" ybr="853.55" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="473.73" ytl="313.87" xbr="871.44" ybr="447.90" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="89.50" ytl="464.88" xbr="856.25" ybr="685.58" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="409.70" ytl="308.43" xbr="471.02" ybr="471.47" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="912.27" ytl="334.36" xbr="1102.72" ybr="707.30" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1096.74" ytl="348.32" xbr="1252.30" ybr="683.37" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+  </image>
+  <image id="6" name="exec-40053e27-68a5-4d2b-9e08-f4019573d5b4.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="962.51" ytl="360.74" xbr="1100.31" ybr="692.95" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1093.94" ytl="359.25" xbr="1216.10" ybr="655.33" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="438.75" ytl="334.81" xbr="487.87" ybr="472.70" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="163.35" ytl="462.36" xbr="921.37" ybr="703.24" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="474.04" ytl="340.84" xbr="933.01" ybr="468.39" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="534.06" ytl="124.04" xbr="1046.00" ybr="320.27" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="582.78" ytl="627.97" xbr="839.09" ybr="933.66" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="171.63" ytl="637.31" xbr="401.90" ybr="832.88" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1145.15" ytl="527.10" xbr="1275.54" ybr="726.35" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="7" name="exec-449dfdae-8d70-42eb-a4a2-8538caf81c49.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="193.74" ytl="637.18" xbr="404.30" ybr="794.09" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="411.80" ytl="607.18" xbr="693.31" ybr="889.85" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1129.80" ytl="556.17" xbr="1312.55" ybr="764.73" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="469.77" ytl="360.41" xbr="793.39" ybr="462.97" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="170.02" ytl="469.78" xbr="776.74" ybr="660.00" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="814.12" ytl="368.99" xbr="1007.02" ybr="682.70" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="997.67" ytl="379.00" xbr="1175.89" ybr="653.33" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="792.89" ytl="190.75" xbr="1116.47" ybr="345.20" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="8" name="exec-4d666161-0a25-4376-bcb5-6d09dd53b6f8.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="675.50" ytl="210.83" xbr="1118.79" ybr="361.42" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="488.04" ytl="346.85" xbr="533.84" ybr="490.61" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="169.03" ytl="484.88" xbr="865.10" ybr="709.24" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="519.04" ytl="375.19" xbr="886.54" ybr="493.36" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="904.49" ytl="402.60" xbr="1077.00" ybr="719.22" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1077.50" ytl="397.13" xbr="1232.06" ybr="693.29" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="505.15" ytl="638.18" xbr="845.56" ybr="869.79" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="156.07" ytl="648.19" xbr="333.62" ybr="799.04" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1171.28" ytl="561.42" xbr="1350.16" ybr="758.99" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+  </image>
+  <image id="9" name="exec-51224d86-d526-4c70-a9de-6c70c9067ff4.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="501.09" ytl="603.32" xbr="789.01" ybr="911.37" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1200.84" ytl="540.44" xbr="1394.73" ybr="780.42" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="93.93" ytl="611.91" xbr="345.32" ybr="825.31" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="412.16" ytl="304.27" xbr="878.61" ybr="434.79" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="81.63" ytl="438.65" xbr="879.38" ybr="669.56" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="360.59" ytl="270.01" xbr="430.23" ybr="445.06" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="523.42" ytl="187.40" xbr="1172.81" ybr="288.23" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="918.18" ytl="333.52" xbr="1103.91" ybr="695.49" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1100.46" ytl="333.52" xbr="1281.87" ybr="669.67" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="10" name="exec-516d3535-eb1a-46d6-904b-388f8b60a3a9.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="979.65" ytl="348.27" xbr="1155.68" ybr="703.90" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1161.04" ytl="363.46" xbr="1287.03" ybr="675.31" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="420.39" ytl="324.27" xbr="938.40" ybr="463.77" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="50.61" ytl="477.12" xbr="937.07" ybr="704.06" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="589.99" ytl="152.74" xbr="1050.54" ybr="316.26" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="567.56" ytl="631.30" xbr="858.64" ybr="973.71" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1216.57" ytl="582.91" xbr="1375.90" ybr="813.38" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="65.23" ytl="648.53" xbr="340.23" ybr="898.16" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="11" name="exec-54237c45-196d-4f8d-8c01-c9b955a3352c.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="446.55" ytl="586.90" xbr="730.52" ybr="871.73" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1192.42" ytl="538.63" xbr="1386.80" ybr="748.06" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="130.04" ytl="604.49" xbr="366.40" ybr="783.50" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="437.47" ytl="316.67" xbr="839.55" ybr="435.50" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="116.15" ytl="436.66" xbr="825.70" ybr="654.72" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="637.15" ytl="143.60" xbr="1096.80" ybr="296.82" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="867.12" ytl="334.08" xbr="1066.20" ybr="683.98" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1082.58" ytl="337.10" xbr="1254.94" ybr="661.14" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="12" name="exec-5832f4af-dd13-41aa-a551-4d4dae5bd329.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="954.56" ytl="273.75" xbr="1182.16" ybr="705.59" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1137.37" ytl="255.73" xbr="1298.30" ybr="601.47" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="480.59" ytl="248.38" xbr="932.53" ybr="413.91" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="72.77" ytl="389.22" xbr="912.51" ybr="724.28" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="513.97" ytl="579.44" xbr="816.39" ybr="925.19" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1228.81" ytl="462.00" xbr="1411.77" ybr="714.94" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="13" name="exec-597297fc-4c95-44be-a5f6-45cfadb18626.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="422.93" ytl="654.93" xbr="738.36" ybr="895.82" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="161.47" ytl="724.20" xbr="295.87" ybr="792.43" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1194.67" ytl="575.17" xbr="1376.44" ybr="789.76" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="627.43" ytl="356.88" xbr="863.37" ybr="480.33" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="103.63" ytl="199.39" xbr="851.83" ybr="701.85" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="729.00" ytl="98.44" xbr="1107.96" ybr="347.07" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="884.93" ytl="370.83" xbr="1101.69" ybr="707.51" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1078.97" ytl="382.71" xbr="1258.48" ybr="691.12" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="14" name="exec-648b95f6-2e68-4b27-a8df-18094e847e9d.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="974.64" ytl="334.81" xbr="1142.66" ybr="693.79" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1148.14" ytl="346.73" xbr="1309.68" ybr="674.34" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1242.38" ytl="560.62" xbr="1411.39" ybr="789.02" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="551.84" ytl="577.12" xbr="845.01" ybr="909.17" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="142.51" ytl="639.44" xbr="408.75" ybr="833.89" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="496.11" ytl="321.73" xbr="937.07" ybr="437.60" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="126.13" ytl="453.56" xbr="933.75" ybr="667.00" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="434.76" ytl="297.80" xbr="514.90" ybr="459.91" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="630.31" ytl="135.13" xbr="1000.67" ybr="296.65" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="15" name="exec-67a994cf-f5ea-47c6-b7c3-ac74c0679002.png" width="1536" height="1024">
+    <box label="engine_bay" source="manual" occluded="0" xtl="51.71" ytl="463.99" xbr="880.02" ybr="691.84" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="406.44" ytl="329.06" xbr="887.17" ybr="458.62" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="502.13" ytl="619.30" xbr="795.80" ybr="951.85" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="62.38" ytl="655.20" xbr="334.61" ybr="875.60" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1204.63" ytl="579.91" xbr="1401.07" ybr="831.20" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="357.44" ytl="289.73" xbr="420.76" ybr="473.34" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="552.89" ytl="128.32" xbr="1075.51" ybr="307.20" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="921.38" ytl="344.57" xbr="1110.60" ybr="717.23" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1100.22" ytl="352.07" xbr="1279.62" ybr="697.04" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="16" name="exec-7a769a2d-162b-4b3e-8684-c6a4e4781d3d.png" width="1536" height="1024">
+    <box label="windshield" source="manual" occluded="0" xtl="647.08" ytl="341.94" xbr="1046.49" ybr="464.35" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="695.33" ytl="479.54" xbr="1449.48" ybr="679.69" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="463.90" ytl="118.50" xbr="962.50" ybr="326.74" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="216.40" ytl="263.30" xbr="258.40" ybr="393.76" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="456.76" ytl="359.81" xbr="594.36" ybr="693.10" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="275.37" ytl="366.87" xbr="427.27" ybr="669.87" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="165.46" ytl="584.09" xbr="329.87" ybr="805.68" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="735.54" ytl="617.95" xbr="1015.22" ybr="930.78" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1125.13" ytl="656.37" xbr="1374.42" ybr="856.62" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="17" name="exec-7e536cca-c9ec-481d-96e9-b46ffe127aa3.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="465.69" ytl="610.00" xbr="749.84" ybr="916.48" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="157.42" ytl="635.02" xbr="400.46" ybr="823.56" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1189.98" ytl="579.19" xbr="1354.84" ybr="794.78" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="463.12" ytl="346.24" xbr="889.62" ybr="470.39" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="590.60" ytl="186.05" xbr="1095.20" ybr="340.90" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="150.08" ytl="467.05" xbr="850.24" ybr="661.95" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="897.24" ytl="373.89" xbr="1104.51" ybr="709.14" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1096.32" ytl="384.20" xbr="1251.02" ybr="685.88" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="18" name="exec-8a201254-3ae8-48ab-a77c-bdcae250f6b4.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="934.04" ytl="407.50" xbr="1091.32" ybr="753.53" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1088.30" ytl="406.64" xbr="1239.12" ybr="721.64" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="537.50" ytl="655.62" xbr="802.75" ybr="951.28" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="221.40" ytl="792.73" xbr="437.29" ybr="856.55" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1183.38" ytl="600.27" xbr="1332.02" ybr="802.50" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="178.51" ytl="421.55" xbr="898.70" ybr="739.65" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="554.61" ytl="397.35" xbr="908.65" ybr="511.03" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="580.08" ytl="148.56" xbr="1114.06" ybr="374.40" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="19" name="exec-9570f9f9-aa99-43b1-a0f2-daf38916087f.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="606.51" ytl="159.74" xbr="1097.96" ybr="340.24" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="467.72" ytl="356.12" xbr="911.65" ybr="476.93" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="127.32" ytl="475.60" xbr="898.97" ybr="708.54" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="542.48" ytl="637.12" xbr="810.86" ybr="950.83" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="132.72" ytl="643.13" xbr="373.01" ybr="848.71" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1182.80" ytl="583.40" xbr="1346.98" ybr="805.75" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="937.61" ytl="376.91" xbr="1096.19" ybr="705.27" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1106.96" ytl="386.78" xbr="1244.86" ybr="680.27" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="20" name="exec-9aa52de3-07f4-4778-b38b-36c23aa321e8.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="925.00" ytl="416.30" xbr="1095.52" ybr="759.82" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1082.05" ytl="424.30" xbr="1230.13" ybr="740.87" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="469.43" ytl="406.04" xbr="893.88" ybr="517.20" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="145.03" ytl="525.30" xbr="880.60" ybr="711.11" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="532.69" ytl="665.48" xbr="790.61" ybr="941.23" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="176.24" ytl="722.65" xbr="417.37" ybr="883.54" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1178.10" ytl="617.44" xbr="1346.81" ybr="829.72" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="672.15" ytl="169.63" xbr="1103.07" ybr="382.00" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+  </image>
+  <image id="21" name="exec-9c293926-2fc4-4432-9b4c-eb4ca9fe3f4c.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="577.94" ytl="112.70" xbr="1116.58" ybr="322.57" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="435.14" ytl="343.53" xbr="923.75" ybr="463.52" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="95.10" ytl="468.72" xbr="920.86" ybr="690.99" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="382.20" ytl="291.18" xbr="450.97" ybr="472.73" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="107.89" ytl="666.96" xbr="374.21" ybr="874.54" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="557.70" ytl="630.25" xbr="846.11" ybr="963.98" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1176.48" ytl="567.52" xbr="1345.55" ybr="808.33" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="956.16" ytl="362.60" xbr="1119.20" ybr="730.06" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1108.73" ytl="371.08" xbr="1269.77" ybr="700.64" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="22" name="exec-a064c47e-b677-44c6-a092-8ff20ae00455.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="889.35" ytl="392.97" xbr="1070.84" ybr="732.50" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1074.83" ytl="392.00" xbr="1249.83" ybr="710.06" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="457.08" ytl="380.00" xbr="862.93" ybr="486.70" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="398.25" ytl="344.10" xbr="457.58" ybr="505.15" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="124.03" ytl="499.66" xbr="856.94" ybr="705.08" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="435.48" ytl="681.58" xbr="741.25" ybr="901.17" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="104.49" ytl="676.24" xbr="330.76" ybr="857.79" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1182.62" ytl="587.91" xbr="1380.06" ybr="805.84" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="619.82" ytl="201.96" xbr="1047.60" ybr="352.53" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="23" name="exec-a1e315b5-18ca-402a-9944-16723ad6a51d.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="581.49" ytl="178.33" xbr="980.91" ybr="289.13" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="479.54" ytl="610.80" xbr="754.84" ybr="934.27" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="134.72" ytl="696.58" xbr="325.94" ybr="796.66" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1213.83" ytl="575.26" xbr="1416.40" ybr="748.05" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="500.09" ytl="310.93" xbr="896.92" ybr="443.20" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="107.92" ytl="450.32" xbr="868.32" ybr="688.00" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="907.64" ytl="325.23" xbr="1188.21" ybr="837.23" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1092.82" ytl="336.93" xbr="1257.35" ybr="665.99" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="24" name="exec-ad1f1220-9c51-4b4e-af6a-74d2d4546116.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="912.99" ytl="404.28" xbr="1088.98" ybr="742.32" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1084.00" ytl="406.23" xbr="1245.04" ybr="714.40" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="520.10" ytl="662.05" xbr="790.83" ybr="954.72" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="160.63" ytl="780.71" xbr="399.95" ybr="865.47" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1188.70" ytl="598.18" xbr="1358.72" ybr="814.62" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="132.48" ytl="516.77" xbr="861.58" ybr="749.22" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="467.90" ytl="382.35" xbr="879.85" ybr="514.46" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="585.64" ytl="166.03" xbr="1133.10" ybr="380.62" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+  </image>
+  <image id="25" name="exec-dee60ab3-ff34-47d7-ad62-d5c093d5a990.png" width="1536" height="1024">
+    <box label="weapons_station" source="manual" occluded="0" xtl="601.77" ytl="204.95" xbr="1024.57" ybr="372.97" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="395.71" ytl="366.64" xbr="451.55" ybr="518.21" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="448.10" ytl="393.97" xbr="854.65" ybr="496.09" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="159.90" ytl="512.67" xbr="860.35" ybr="699.56" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="542.15" ytl="643.39" xbr="791.99" ybr="939.33" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="166.08" ytl="684.35" xbr="401.45" ybr="872.98" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1108.06" ytl="609.87" xbr="1259.26" ybr="822.22" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="891.46" ytl="405.35" xbr="1032.41" ybr="725.52" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1035.86" ytl="418.71" xbr="1176.77" ybr="705.27" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="26" name="exec-e561515d-18c0-4b32-b0c5-a2ff442f4e9b.png" width="1536" height="1024">
+    <box label="door" source="manual" occluded="0" xtl="292.08" ytl="357.75" xbr="461.85" ybr="678.53" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="479.73" ytl="348.95" xbr="656.25" ybr="699.12" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="692.46" ytl="324.22" xbr="1090.93" ybr="451.70" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="747.86" ytl="460.38" xbr="1462.04" ybr="668.63" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="717.51" ytl="460.83" xbr="790.88" ybr="497.36" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="458.51" ytl="157.89" xbr="1002.49" ybr="320.75" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="145.59" ytl="577.24" xbr="329.59" ybr="814.24" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="799.71" ytl="604.76" xbr="1095.86" ybr="934.82" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1190.59" ytl="633.68" xbr="1436.89" ybr="835.11" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="27" name="exec-ecd5ba16-f4b5-4258-8ded-eafa009e14d2.png" width="1536" height="1024">
+    <box label="wheel_tire" source="manual" occluded="0" xtl="551.99" ytl="563.06" xbr="841.13" ybr="864.70" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="158.13" ytl="583.75" xbr="383.93" ybr="760.85" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1197.57" ytl="496.92" xbr="1357.46" ybr="699.61" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="511.71" ytl="259.07" xbr="940.22" ybr="373.88" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="454.31" ytl="222.36" xbr="516.38" ybr="396.57" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="141.27" ytl="391.23" xbr="936.21" ybr="639.53" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="599.15" ytl="51.49" xbr="1150.47" ybr="243.72" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="975.75" ytl="274.27" xbr="1143.38" ybr="633.65" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1133.03" ytl="283.75" xbr="1280.84" ybr="603.05" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+  <image id="28" name="exec-fd6916d4-b56f-4f06-bd76-b539b605967f.png" width="1628" height="966">
+    <box label="door" source="manual" occluded="0" xtl="918.90" ytl="329.42" xbr="1119.16" ybr="703.78" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1122.43" ytl="336.44" xbr="1294.39" ybr="668.40" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="482.45" ytl="599.89" xbr="749.70" ybr="929.07" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1230.18" ytl="539.48" xbr="1412.49" ybr="768.54" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="199.47" ytl="727.77" xbr="419.87" ybr="818.60" z_order="0">
+      <attribute name="damage_state">unknown</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="151.58" ytl="444.25" xbr="868.29" ybr="691.86" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="comms_equipment" source="manual" occluded="0" xtl="482.33" ytl="311.34" xbr="542.03" ybr="450.47" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="536.40" ytl="317.66" xbr="885.32" ybr="436.41" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="weapons_station" source="manual" occluded="0" xtl="573.44" ytl="40.45" xbr="1212.33" ybr="301.12" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+  </image>
+  <image id="29" name="exec-ffbcb6d4-ff4c-428e-8830-980521f67d09.png" width="1499" height="1049">
+    <box label="weapons_station" source="manual" occluded="0" xtl="602.97" ytl="168.85" xbr="1077.45" ybr="372.20" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="360.16" ytl="681.66" xbr="701.35" ybr="923.71" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="wheel_tire" source="manual" occluded="0" xtl="1144.43" ytl="616.70" xbr="1337.93" ybr="797.90" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="windshield" source="manual" occluded="0" xtl="507.85" ytl="395.85" xbr="784.77" ybr="504.57" z_order="0">
+      <attribute name="damage_state">degraded</attribute>
+    </box>
+    <box label="engine_bay" source="manual" occluded="0" xtl="72.30" ytl="270.04" xbr="758.10" ybr="767.82" z_order="0">
+      <attribute name="damage_state">destroyed</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="813.49" ytl="407.48" xbr="1020.67" ybr="748.67" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+    <box label="door" source="manual" occluded="0" xtl="1032.29" ytl="410.83" xbr="1204.60" ybr="717.22" z_order="0">
+      <attribute name="damage_state">intact</attribute>
+    </box>
+  </image>
+</annotations>

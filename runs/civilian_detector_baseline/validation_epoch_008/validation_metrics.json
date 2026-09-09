@@ -1,0 +1,306 @@
+{
+  "status": "completed",
+  "scope": "validation split only; held-out test split not accessed",
+  "split": "validation",
+  "checkpoint": "C:\\Users\\jrwhite\\OneDrive - Applied Research Associates, Inc\\Marketing\\CRATER\\software\\runs\\civilian_detector_baseline\\checkpoint_last.pt",
+  "checkpoint_sha256": "ea171adf375344a4251c7b4920ca5a3a24418bc52033ef86bfe2ba5d74f42cbc",
+  "completed_epochs": 8,
+  "global_step": 10344,
+  "annotation_file": "C:\\Users\\jrwhite\\OneDrive - Applied Research Associates, Inc\\Marketing\\CRATER\\software\\annotations\\carparts23_instances_val.json",
+  "annotation_sha256": "ee385a93b22e4986ab5b0de38cc455e7a4376bff8592ba68c68c43be2cb0f16b",
+  "images": 193,
+  "detections": 2861,
+  "device": "cuda",
+  "runtime": {
+    "torch_version": "2.9.1+cu128",
+    "cuda_runtime": "12.8"
+  },
+  "inference_settings": {
+    "precision": "float32",
+    "score_threshold": 0.05,
+    "nms_threshold": 0.5,
+    "detections_per_image": 100
+  },
+  "inference": {
+    "elapsed_seconds": 11.788076899945736,
+    "images_per_second": 16.37247547993926,
+    "peak_memory_mib": 552.42529296875
+  },
+  "overall": {
+    "ap": 0.5507580550152037,
+    "ap50": 0.8179672551884319,
+    "ap75": 0.649753490358758,
+    "ap_small": 0.2945244169206241,
+    "ap_medium": 0.5048993443732969,
+    "ap_large": 0.6305288352536222,
+    "ar1": 0.6090958448141844,
+    "ar10": 0.6422747903387888,
+    "ar100": 0.6422747903387888,
+    "ar_small": 0.3463754213507178,
+    "ar_medium": 0.572148620291172,
+    "ar_large": 0.7342040752996306
+  },
+  "selection_metric": {
+    "name": "mean_per_class_coco_ap_excluding_object",
+    "value": 0.5757925120613492,
+    "excluded_categories": [
+      "object"
+    ],
+    "minimum_improvement": 0.005
+  },
+  "per_class": [
+    {
+      "category_id": 1,
+      "category_name": "back_bumper",
+      "instances": 46,
+      "images": 46,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.6722215952078343,
+      "coco_ap50": 0.9301142285281159,
+      "coco_ar100": 0.75
+    },
+    {
+      "category_id": 2,
+      "category_name": "back_door",
+      "instances": 66,
+      "images": 66,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.6171558162135654,
+      "coco_ap50": 0.9120312824413395,
+      "coco_ar100": 0.6803030303030303
+    },
+    {
+      "category_id": 3,
+      "category_name": "back_glass",
+      "instances": 55,
+      "images": 54,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.5715312253247279,
+      "coco_ap50": 0.7751258703817028,
+      "coco_ar100": 0.7145454545454545
+    },
+    {
+      "category_id": 4,
+      "category_name": "back_left_door",
+      "instances": 21,
+      "images": 21,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.6252254754402395,
+      "coco_ap50": 0.9644521174806558,
+      "coco_ar100": 0.7
+    },
+    {
+      "category_id": 5,
+      "category_name": "back_left_light",
+      "instances": 28,
+      "images": 28,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.41694396582655924,
+      "coco_ap50": 0.6381598671622031,
+      "coco_ar100": 0.5178571428571428
+    },
+    {
+      "category_id": 6,
+      "category_name": "back_light",
+      "instances": 80,
+      "images": 58,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.4817431890232942,
+      "coco_ap50": 0.7351803371042995,
+      "coco_ar100": 0.6012500000000001
+    },
+    {
+      "category_id": 7,
+      "category_name": "back_right_door",
+      "instances": 18,
+      "images": 18,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.5360802041742635,
+      "coco_ap50": 0.8584158415841583,
+      "coco_ar100": 0.6333333333333333
+    },
+    {
+      "category_id": 8,
+      "category_name": "back_right_light",
+      "instances": 21,
+      "images": 21,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.6904745978699003,
+      "coco_ap50": 0.8867692620118096,
+      "coco_ar100": 0.7857142857142858
+    },
+    {
+      "category_id": 9,
+      "category_name": "front_bumper",
+      "instances": 107,
+      "images": 107,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.7381929819815392,
+      "coco_ap50": 0.9781749104249902,
+      "coco_ar100": 0.7906542056074766
+    },
+    {
+      "category_id": 10,
+      "category_name": "front_door",
+      "instances": 74,
+      "images": 74,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.670373306530733,
+      "coco_ap50": 0.9432067473399555,
+      "coco_ar100": 0.7472972972972973
+    },
+    {
+      "category_id": 11,
+      "category_name": "front_glass",
+      "instances": 108,
+      "images": 108,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.8070053585455571,
+      "coco_ap50": 0.9951743913785734,
+      "coco_ar100": 0.8435185185185186
+    },
+    {
+      "category_id": 12,
+      "category_name": "front_left_door",
+      "instances": 22,
+      "images": 22,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.647457144066055,
+      "coco_ap50": 0.9654349363507779,
+      "coco_ar100": 0.7181818181818183
+    },
+    {
+      "category_id": 13,
+      "category_name": "front_left_light",
+      "instances": 50,
+      "images": 50,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.6039213047295018,
+      "coco_ap50": 0.8971157985363754,
+      "coco_ar100": 0.66
+    },
+    {
+      "category_id": 14,
+      "category_name": "front_light",
+      "instances": 121,
+      "images": 81,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.5429415500903354,
+      "coco_ap50": 0.8117846818007347,
+      "coco_ar100": 0.6033057851239669
+    },
+    {
+      "category_id": 15,
+      "category_name": "front_right_door",
+      "instances": 20,
+      "images": 20,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.5687323045491363,
+      "coco_ap50": 0.9429590732352585,
+      "coco_ar100": 0.65
+    },
+    {
+      "category_id": 16,
+      "category_name": "front_right_light",
+      "instances": 42,
+      "images": 42,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.5245810870968868,
+      "coco_ap50": 0.8870576946465671,
+      "coco_ar100": 0.6166666666666666
+    },
+    {
+      "category_id": 17,
+      "category_name": "hood",
+      "instances": 108,
+      "images": 108,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.6964229865671854,
+      "coco_ap50": 0.9603480189288771,
+      "coco_ar100": 0.7675925925925926
+    },
+    {
+      "category_id": 18,
+      "category_name": "left_mirror",
+      "instances": 43,
+      "images": 43,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.5300496190361561,
+      "coco_ap50": 0.8685035783663084,
+      "coco_ar100": 0.6255813953488373
+    },
+    {
+      "category_id": 19,
+      "category_name": "object",
+      "instances": 2,
+      "images": 2,
+      "supported": true,
+      "low_support": true,
+      "coco_ap": 0.0,
+      "coco_ap50": 0.0,
+      "coco_ar100": 0.0
+    },
+    {
+      "category_id": 20,
+      "category_name": "right_mirror",
+      "instances": 46,
+      "images": 46,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.4691667377730113,
+      "coco_ap50": 0.7680827577164668,
+      "coco_ar100": 0.5478260869565217
+    },
+    {
+      "category_id": 21,
+      "category_name": "tailgate",
+      "instances": 9,
+      "images": 9,
+      "supported": true,
+      "low_support": true,
+      "coco_ap": 0.47163287757347166,
+      "coco_ap50": 0.720749031424882,
+      "coco_ar100": 0.6444444444444444
+    },
+    {
+      "category_id": 22,
+      "category_name": "trunk",
+      "instances": 14,
+      "images": 14,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.4782481632778662,
+      "coco_ap50": 0.8297126635740498,
+      "coco_ar100": 0.6071428571428571
+    },
+    {
+      "category_id": 23,
+      "category_name": "wheel",
+      "instances": 76,
+      "images": 53,
+      "supported": true,
+      "low_support": false,
+      "coco_ap": 0.30733377445186455,
+      "coco_ap50": 0.5446937789158317,
+      "coco_ar100": 0.5671052631578948
+    }
+  ]
+}

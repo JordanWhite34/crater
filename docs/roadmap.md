@@ -1,6 +1,6 @@
 # CRATER roadmap
 
-Updated: September 1, 2026
+Updated: September 9, 2026
 
 ## Stage 1: civilian detector pretraining
 
@@ -71,14 +71,37 @@ Deliverable: civilian crop-classifier checkpoints and calibrated metrics.
 
 ## Stage 4: military damage fine-tuning
 
-Status: crop-generation pilot complete; validated labels and a training-scale
-military damage dataset remain blocked on human review and additional data.
+Status: real and synthetic damage-box inventories imported; training-ready
+grouped crops, synthetic QA, and additional damaged examples remain.
 
+- Completed: added the [two-stage damage notebook](../experiments/damage/part_damage_classification.ipynb)
+  and tested its preparation/training helpers. It trains a real-image ResNet18
+  baseline per component group, then fine-tunes from those weights using
+  synthetic crops, retaining real-only validation and test splits. No production
+  damage training has run; grouping and annotation review still precede it.
+- Completed: compared `Desktop/synthetic` with the existing synthetic import;
+  all 30 images and the recorded original annotation-export hash match.
 - Completed: built the detector-driven crop annotation workflow and ran its
   16-image pilot through crop and contact-sheet generation.
-- Pending: complete and validate the three human label uploads; the final label
-  and prepared-split notebook cell has not run.
-- Generate a larger military crop dataset without crossing source splits.
+- Completed: validated and imported a 224-image CVAT job with 2,240 manual
+  component boxes and a damage state on every box. Canonical mapping yields
+  2,135 `no_visible_damage`, 32 `possible_damage`, 42
+  `severe_visible_damage`, and 31 `unobservable` instances.
+- Completed: validated and imported a separate 30-image synthetic HMMWV source
+  with 251 manual CVAT boxes, byte-level image lineage, and prompt provenance.
+  It contains 188 `no_visible_damage`, 22 `possible_damage`, 31
+  `severe_visible_damage`, and 10 `unobservable` boxes.
+- Pending: visually QA the synthetic images and annotations for component
+  identity, box fit, label fit, and generation artifacts. Admit accepted crops
+  to training only; do not use synthetic images for validation or test metrics.
+- Pending: complete authoritative source/scene/vehicle grouping, assign splits,
+  and materialize ground-truth crops without crossing source groups.
+- Pending: add damaged communications-equipment examples and expand the sparse
+  degraded/destroyed classes before treating the data as training-scale. The
+  synthetic source adds only one degraded communications-equipment box and no
+  destroyed communications-equipment boxes.
+- Pending: complete the separate 16-image predicted-crop pilot label uploads;
+  the final label and prepared-split notebook cell has not run.
 - Fine-tune compatible civilian damage checkpoints.
 - Train mission-equipment damage directly on military data.
 - Compare civilian initialization against training from scratch.

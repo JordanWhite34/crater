@@ -28,6 +28,9 @@ datasets/
       annotations/             # task-specific prepared COCO split files
       manifests/
     damage/
+      source/
+        humvee_cvat_damage_v1/ # validated human boxes + damage states
+        synthetic_humvee_damage_v1/ # synthetic PNGs + human damage boxes
       images/{train,val,test}/
       labels.csv
 ```
@@ -53,3 +56,26 @@ Military imagery and all damage imagery must include source/license metadata.
 Split source images, scenes, vehicles, and sequences before generating crops;
 every crop inherits its source image's split. This prevents crops from the same
 vehicle or source asset leaking across train, validation, and test sets.
+
+Import the versioned Humvee CVAT damage source with:
+
+```powershell
+python tools\data\import_cvat_damage_annotations.py `
+  "<path-to-CVAT-export>\annotations.xml"
+```
+
+The imported box inventory is a validated annotation source, not a prepared
+training split. Do not fill its blank `split` column image by image; first
+resolve the source-group metadata shared with the component dataset.
+
+Import the separate synthetic Humvee source with:
+
+```powershell
+python tools\data\import_synthetic_cvat_damage_annotations.py `
+  "<path-to-synthetic-folder>\annotations.xml" `
+  --source-image-dir "<path-to-synthetic-folder>"
+```
+
+Synthetic images are training-only candidates after visual QA. Never place
+them in validation or test partitions, and never substitute prompt intent for
+the human CVAT damage attribute.

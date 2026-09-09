@@ -43,8 +43,22 @@ experiments, metrics, and checkpoints separate makes failures attributable.
   incomplete, the received labels are not the canonical CRATER taxonomy, and a
   full held-out test evaluation and versioned checkpoint promotion remain.
 - A 16-image military damage-labeling pilot has generated detector-derived
-  crops and review sheets. Human crop labels have not been completed, and no
-  civilian or military damage classifier has been trained.
+  crops and review sheets. Its CSV label uploads have not been completed.
+- A separate 224-image CVAT export now provides 2,240 human component boxes
+  with `intact`, `degraded`, `destroyed`, or `unknown` damage states. The
+  validated [source inventory](datasets/military/damage/source/humvee_cvat_damage_v1/README.md)
+  maps those states to canonical CRATER levels without changing the original
+  labels.
+- A separate synthetic source now preserves 30 generated HMMWV images and 251
+  human CVAT damage boxes with generation lineage and integrity hashes. It is a
+  training-only candidate pending synthetic visual QA; it is excluded from
+  validation and test use.
+- Grouped real-image splits and crop materialization remain before training,
+  and no civilian or military damage classifier has been trained.
+- The [part-damage training notebook](experiments/damage/part_damage_classification.ipynb)
+  now prepares reviewed human-box crops, trains on real data, then fine-tunes
+  those checkpoints on synthetic data with real-only validation and testing.
+  Source-group and label review is required before starting either stage.
 
 The scratch checkpoint is retained for comparison. The required transfer
 lineage is the promoted COCO-initialized civilian checkpoint followed by

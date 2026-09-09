@@ -9,6 +9,8 @@ experiments/
     yolox_s_crater6.py          military 6-class fine-tuning
   damage/
     README.md                   crop-classification contract
+    part_damage_classification.ipynb  real training, then synthetic fine-tuning
+    training.py                 ResNet18 training and checkpoint evaluation
 ```
 
 An experiment file defines model identity and stable training policy. Machine
