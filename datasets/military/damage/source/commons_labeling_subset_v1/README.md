@@ -1,7 +1,7 @@
 # Commons damage-labeling subset v1
 
-This fixed 16-image pilot is the default input to
-`experiments/damage/military_damage_crop_labeling.ipynb`.
+This is a historical 16-image crop-labeling pilot. Its images and provenance are
+preserved, but it is not used by the active CVAT damage-classification notebook.
 
 Coverage was selected before crop labeling:
 
@@ -16,8 +16,6 @@ only damage labels consumed by the prepared per-head datasets.
 
 `selection_manifest.csv` preserves the exact Commons page, author, license,
 source URLs, local SHA-256, selection order, candidate components, and selection
-rationale for every file. Reproduce or verify the subset with:
-
-```powershell
-python tools\data\prepare_commons_damage_labeling_subset.py
-```
+rationale for every file. The retired preparation scripts and notebook are in
+`outputs/repo_cleanup/before_simplification_20260909_122427.zip` on the original
+machine and in Git history for tracked files.

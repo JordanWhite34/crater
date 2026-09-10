@@ -16,23 +16,15 @@
 !/datasets/military/damage/source/synthetic_humvee_damage_v1/images/
 !/datasets/military/damage/source/synthetic_humvee_damage_v1/images/*.png
 
-# Legacy civilian dataset artifacts from before the datasets/ reorganization.
-/images/
-/annotations/
-/manifests/
-/audit/
-/.tmp_download_test/
-
 # Model inputs and generated training artifacts.
 /weights/
 /outputs/
-# Keep trained weights on the machine that produced them; commit run metadata.
-/runs/**/*.pt
-/runs/**/*.pth
+/runs/
 cache_*/
 
 # Python-generated files and local environments.
 __pycache__/
+.ipynb_checkpoints/
 *.py[cod]
 .venv/
 venv/
