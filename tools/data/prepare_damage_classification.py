@@ -33,17 +33,30 @@ def write_csv(path: Path, rows: list[dict], fields=None) -> None:
         writer.writerows(rows)
 
 
-def load_inventory(root: Path, include_synthetic: bool = True) -> list[dict]:
+def load_inventory(
+    root: Path,
+    include_synthetic: bool = True,
+    synthetic_source_names: tuple[str, ...] | list[str] | None = None,
+) -> list[dict]:
     """Join labels to image provenance and verify source hashes before use."""
     damage_root = root / "datasets/military/damage/source"
-    sources = [("real", damage_root / "humvee_cvat_damage_v1",
-                root / "datasets/military/components/source/humvee")]
+    sources = [(
+        "real",
+        "humvee_cvat_damage_v1",
+        damage_root / "humvee_cvat_damage_v1",
+        root / "datasets/military/components/source/humvee",
+    )]
     if include_synthetic:
-        sources.append(("synthetic", damage_root / "synthetic_humvee_damage_v1",
-                        damage_root / "synthetic_humvee_damage_v1/images"))
+        names = synthetic_source_names or ("synthetic_humvee_damage_v1",)
+        if len(names) != len(set(names)) or any(Path(name).name != name for name in names):
+            raise ValueError("Synthetic source names must be unique plain directory names.")
+        sources.extend(
+            ("synthetic", name, damage_root / name, damage_root / name / "images")
+            for name in names
+        )
     levels = json.loads((root / "configs/taxonomy.json").read_text())["damage"]["levels"]
     inventory, annotation_ids = [], set()
-    for domain, source_dir, image_dir in sources:
+    for domain, source_dataset, source_dir, image_dir in sources:
         label_file = source_dir / "damage_box_annotations.csv"
         manifest_file = (source_dir if domain == "synthetic" else image_dir) / "source_manifest.csv"
         manifest_rows = read_csv(manifest_file)
@@ -85,6 +98,7 @@ def load_inventory(root: Path, include_synthetic: bool = True) -> list[dict]:
                 raise ValueError(f"Invalid box: {annotation_id}")
             inventory.append({
                 **row, "source_image_sha256": expected, "domain": domain,
+                "source_dataset": source_dataset,
                 "image_path": image_path.relative_to(root).as_posix(),
                 "source_labels_sha256": label_hash,
                 "source_manifest_sha256": manifest_hash,

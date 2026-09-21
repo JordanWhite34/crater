@@ -1,3 +1,4 @@
 datasets/military/components/source/humvee/*.jpg filter=lfs diff=lfs merge=lfs -text
 datasets/military/components/source/humvee/*.png filter=lfs diff=lfs merge=lfs -text
 datasets/military/damage/source/synthetic_humvee_damage_v1/images/*.png filter=lfs diff=lfs merge=lfs -text
+datasets/military/damage/source/synthetic_humvee_additions_v2/images/*.png filter=lfs diff=lfs merge=lfs -text

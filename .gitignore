@@ -15,6 +15,13 @@
 !/datasets/military/damage/source/synthetic_humvee_damage_v1/import_manifest.json
 !/datasets/military/damage/source/synthetic_humvee_damage_v1/images/
 !/datasets/military/damage/source/synthetic_humvee_damage_v1/images/*.png
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/README.md
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/annotations.xml
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/damage_box_annotations.csv
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/import_manifest.json
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/source_manifest.csv
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/images/
+!/datasets/military/damage/source/synthetic_humvee_additions_v2/images/*.png
 
 # Model inputs and generated training artifacts.
 /weights/
