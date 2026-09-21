@@ -27,6 +27,7 @@
 /weights/
 /outputs/
 /runs/
+/tmp/
 cache_*/
 
 # Python-generated files and local environments.
