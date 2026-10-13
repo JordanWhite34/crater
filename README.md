@@ -1,60 +1,24 @@
-# CRATER fresh setup
+# CRATER
 
-All source images are in `images/`. All labels and source metadata are in
-`labels.json`. The Python files and `requirements.txt` are intentionally empty;
-choose your own dependencies and write the pipeline from scratch.
+This branch contains the CRATER image data layout and package scaffold.
 
-| File | Intended use |
-| --- | --- |
-| `dataset.py` | Read images and labels; choose transforms and splits |
-| `model.py` | Define the model |
-| `train.py` | Train and save checkpoints |
-| `evaluate.py` | Compute evaluation metrics |
-| `predict.py` | Run inference |
-| `requirements.txt` | Record dependencies |
+## Raw data
 
-## Label document
+- data/civilian/raw/images/ contains 2,970 images linked to civilian source records (source IDs 1-6).
+- data/civilian/raw/labels/labels.json contains their 21,877 annotations, 78 categories, 6 source records, and provenance.
+- data/military/raw/images/ contains 543 images linked to military source records (source IDs 7-13).
+- data/military/raw/labels/labels.json contains their 6,447 annotations, 60 categories, 12 source records, and provenance.
 
-The document uses COCO-style `images`, `annotations`, and `categories`, plus
-`sources`. Bounding boxes use `[x, y, width, height]` in image pixels.
-Segmentation geometry is preserved where supplied. Image filenames use their
-full SHA-256 hash to avoid filename collisions. Exact byte duplicates share one
-image record; resized or recompressed copies remain separate images.
+The two label files together preserve all records from the former combined inventory: 3,513 images, 28,324 annotations, 138 categories, and 18 source records. Image paths are repository-relative. Annotation, image, category, and source IDs and provenance are retained. Category IDs are source-scoped; use source_id when selecting labels.
 
-Each image has a `provenance` list with source IDs, original filenames and image
-records, domain (`real`, `synthetic`, or `unknown`), and available manifest
-metadata. Each annotation has `provenance` identifying its source and original
-record. Resolve `source_id` against `sources` for the original label file, its
-hash, taxonomy, licenses, and other source metadata. License IDs in original
-records are scoped to their source, not to the combined document.
+## Layout
 
-Categories are scoped to each source label file. Original spellings remain
-unchanged, including `tire`, `wheel_tire`, and `weapons_station`. Decide your
-own mapping before training. Existing split and grouping values are retained
-as provenance; this setup assigns no new train/validation/test split.
+- configs/ - model and data configuration
+- data/{civilian,military}/raw/{images,labels}/ - source images and labels grouped by provenance
+- data/{civilian,military}/{processed,splits}/ - prepared data and split definitions
+- src/crater/{data,models,training,evaluation,inference}/ - package code
+- scripts/ - command-line entry points
+- 	ests/ - automated checks
+- outputs/ - generated results and checkpoints
 
-The inventory includes civilian CarParts23 labels, the alternative derived
-CRATER transfer taxonomy, real Humvee component labels, real and synthetic CVAT
-damage labels, and all three splits of the new Military Vehicle Components
-COCO export. Several label sources describe the same images. Select the source
-or label version you intend to use rather than training on every annotation
-indiscriminately. Damage annotations expose `damage_level` and CVAT attributes;
-their original normalized CSV records and CVAT boxes are also retained.
-
-The new export's real/synthetic domain is recorded as `unknown` because the
-export does not establish that distinction. Generation intent is provenance,
-not a human damage label. Review/group related images before assigning splits;
-keep synthetic data out of validation and test. CVAT default `intact` values
-do not prove that each box was explicitly reviewed.
-
-Only image files actually present in the supplied source folders are included.
-Old README inventories are not used to infer missing data. Model outputs,
-generated crops, checkpoints, and the old application code are excluded.
-
-## Git
-
-This is the independent `fresh-setup` branch, with a new root commit. It lives
-in a linked checkout so the original checkout and its uncommitted work remain
-intact. Images are tracked with Git LFS. Install Git LFS before cloning or
-checking out this branch on another computer, and run `git lfs pull` if image
-files contain pointer text. No training code or dependencies are provided.
+Empty directories are local scaffolding until project files are added.
