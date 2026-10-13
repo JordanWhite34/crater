@@ -3,3 +3,16 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 outputs/
+
+# Local artifacts retained when switching from the previous project branches.
+/.tmp_download_test/
+/annotations/
+/audit/
+/datasets/
+/images/train/
+/images/val/
+/images/test/
+/manifests/
+/runs/
+/third_party/
+/tmp/
