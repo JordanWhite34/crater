@@ -136,6 +136,81 @@ def verify_manifest(rows, crop_root):
     return sha256_file(manifest)
 
 
+def load_completed_stage(*, rows, crop_root: Path, output_dir: Path, group: str, levels,
+                         domain: str, config: TrainingConfig,
+                         initialization: str = "imagenet",
+                         parent_checkpoint: Path | None = None):
+    """Return a finished stage's best checkpoint, or None when it has not started.
+
+    Existing directories are never resumed or overwritten. A directory is reusable
+    only when its metadata, full history and checkpoints prove that the requested
+    stage finished with the current inputs and configuration.
+    """
+    if not output_dir.exists():
+        return None
+    if domain not in {"real", "synthetic"} or (domain == "synthetic") != (parent_checkpoint is not None):
+        raise ValueError("Real stage starts fresh; synthetic stage requires its real parent.")
+
+    required = {name: output_dir / name for name in
+                ("run_config.json", "history.json", "best.pt", "last.pt")}
+    missing = [name for name, path in required.items() if not path.is_file()]
+    if missing:
+        raise ValueError(
+            f"Incomplete existing stage at {output_dir}; missing {missing}. "
+            "Inspect it and choose a new RUN_NAME."
+        )
+
+    manifest_hash = verify_manifest(rows, crop_root)
+    parent_hash = sha256_file(parent_checkpoint) if parent_checkpoint is not None else None
+    expected = {
+        "group": group,
+        "levels": list(levels),
+        "domain": domain,
+        "config": asdict(config),
+        "manifest_sha256": manifest_hash,
+        "parent_checkpoint_sha256": parent_hash,
+        "initialization": "real_stage_checkpoint" if parent_checkpoint is not None else initialization,
+    }
+    metadata = json.loads(required["run_config.json"].read_text())
+    mismatched = [key for key, value in expected.items() if metadata.get(key) != value]
+    if mismatched:
+        raise ValueError(
+            f"Existing stage at {output_dir} does not match the current {mismatched}. "
+            "Choose a new RUN_NAME."
+        )
+
+    history = json.loads(required["history.json"].read_text())
+    first_epoch = 0 if parent_checkpoint is not None else 1
+    expected_epochs = list(range(first_epoch, config.epochs + 1))
+    if not isinstance(history, list) or [row.get("epoch") for row in history] != expected_epochs:
+        raise ValueError(
+            f"Incomplete existing stage history at {output_dir}; expected epochs "
+            f"{first_epoch} through {config.epochs}. Inspect it and choose a new RUN_NAME."
+        )
+
+    checkpoints = {
+        name: torch.load(path, map_location="cpu", weights_only=True)
+        for name, path in (("best", required["best.pt"]), ("last", required["last.pt"]))
+    }
+    for name, checkpoint in checkpoints.items():
+        mismatched = [key for key, value in expected.items() if checkpoint.get(key) != value]
+        if mismatched:
+            raise ValueError(
+                f"Existing {name} checkpoint at {output_dir} does not match the current "
+                f"{mismatched}. Choose a new RUN_NAME."
+            )
+    best_row = max(history, key=lambda row: row["validation"]["macro_f1"])
+    if (checkpoints["last"].get("epoch") != config.epochs
+            or checkpoints["last"].get("validation") != history[-1]["validation"]
+            or checkpoints["best"].get("epoch") != best_row["epoch"]
+            or checkpoints["best"].get("validation") != best_row["validation"]):
+        raise ValueError(
+            f"Existing checkpoints and history disagree at {output_dir}. "
+            "Inspect them and choose a new RUN_NAME."
+        )
+    return required["best.pt"]
+
+
 def train_stage(*, rows, crop_root: Path, output_dir: Path, group: str, levels,
                 domain: str, config: TrainingConfig, device: str,
                 initialization: str = "imagenet", parent_checkpoint: Path | None = None):

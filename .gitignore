@@ -1,20 +1,5 @@
-# Dataset artifacts are ignored by default.
-# Track documentation and manifests, plus explicit versioned source datasets.
-/datasets/**
-!/datasets/**/
-!/datasets/**/README.md
-!/datasets/**/source_manifest.csv
-!/datasets/military/components/source/humvee/*.jpg
-!/datasets/military/components/source/humvee/*.png
-!/datasets/military/components/source/humvee/instances_default.json
-!/datasets/military/damage/source/humvee_cvat_damage_v1/annotations.xml
-!/datasets/military/damage/source/humvee_cvat_damage_v1/damage_box_annotations.csv
-!/datasets/military/damage/source/humvee_cvat_damage_v1/import_manifest.json
-!/datasets/military/damage/source/synthetic_humvee_damage_v1/annotations.xml
-!/datasets/military/damage/source/synthetic_humvee_damage_v1/damage_box_annotations.csv
-!/datasets/military/damage/source/synthetic_humvee_damage_v1/import_manifest.json
-!/datasets/military/damage/source/synthetic_humvee_damage_v1/images/
-!/datasets/military/damage/source/synthetic_humvee_damage_v1/images/*.png
+# All datasets are local artifacts and must remain outside version control.
+/datasets/
 
 # Legacy civilian dataset artifacts from before the datasets/ reorganization.
 /images/
@@ -26,13 +11,13 @@
 # Model inputs and generated training artifacts.
 /weights/
 /outputs/
-# Keep trained weights on the machine that produced them; commit run metadata.
-/runs/**/*.pt
-/runs/**/*.pth
+/runs/
+/tmp/
 cache_*/
 
 # Python-generated files and local environments.
 __pycache__/
+.ipynb_checkpoints/
 *.py[cod]
 .venv/
 venv/
@@ -40,6 +25,7 @@ env/
 
 # Local tooling and editor files.
 .pytest_cache/
+pytest-cache-files-*/
 .mypy_cache/
 .ruff_cache/
 .idea/

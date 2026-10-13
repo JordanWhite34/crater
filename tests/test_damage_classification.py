@@ -105,7 +105,9 @@ def test_metrics_keep_absent_classes_explicit():
 
 def test_real_then_synthetic_training_and_checkpoint_reload(tmp_path):
     import torch
-    from experiments.damage.training import TrainingConfig, train_stage, final_comparison, evaluate_checkpoint
+    from experiments.damage.training import (
+        TrainingConfig, evaluate_checkpoint, final_comparison, load_completed_stage, train_stage,
+    )
     previous_threads = torch.get_num_threads()
     torch.set_num_threads(2)
     try:
@@ -115,10 +117,18 @@ def test_real_then_synthetic_training_and_checkpoint_reload(tmp_path):
         config = TrainingConfig(epochs=1, batch_size=16, image_size=32)
         common = dict(rows=prepared, crop_root=crop_root, group="mobility", levels=LEVELS,
                       config=config, device="cpu", initialization="scratch")
+        load_common = {key: value for key, value in common.items() if key != "device"}
         baseline = train_stage(**common, output_dir=tmp_path / "real", domain="real")
+        assert load_completed_stage(
+            **load_common, output_dir=tmp_path / "real", domain="real"
+        ) == baseline
         original_hash = sha256_file(baseline)
         adapted = train_stage(**common, output_dir=tmp_path / "synthetic", domain="synthetic",
                               parent_checkpoint=baseline)
+        assert load_completed_stage(
+            **load_common, output_dir=tmp_path / "synthetic", domain="synthetic",
+            parent_checkpoint=baseline,
+        ) == adapted
         assert sha256_file(baseline) == original_hash
         payload = torch.load(adapted, weights_only=True)
         assert payload["parent_checkpoint_sha256"] == original_hash
@@ -132,6 +142,11 @@ def test_real_then_synthetic_training_and_checkpoint_reload(tmp_path):
             final_comparison({"real": baseline}, prepared, crop_root, tmp_path / "test", "cpu")
         with pytest.raises(ValueError, match="real parent"):
             train_stage(**common, output_dir=tmp_path / "bad", domain="synthetic")
+        with pytest.raises(ValueError, match="current.*config"):
+            load_completed_stage(
+                **{**load_common, "config": TrainingConfig(epochs=2, batch_size=16, image_size=32)},
+                output_dir=tmp_path / "real", domain="real",
+            )
         changed = copy.deepcopy(prepared)
         changed[0]["damage_level"] = LEVELS[1]
         with pytest.raises(ValueError, match="differ from the saved manifest"):

@@ -64,10 +64,11 @@ class GenerationSpec:
     image_name: str
     vehicle_family: str
     intended_condition: str
+    generation_session_id: str = GENERATION_SESSION_ID
 
     @property
     def generation_group_id(self) -> str:
-        return f"{GENERATION_SESSION_ID}:{self.prompt_id}"
+        return f"{self.generation_session_id}:{self.prompt_id}"
 
 
 GENERATION_SPECS = (
@@ -175,7 +176,7 @@ def _inspect_source_images(
             "source_type": "text_to_image",
             "generator": GENERATOR,
             "generator_model": GENERATOR_MODEL,
-            "generation_session_id": GENERATION_SESSION_ID,
+            "generation_session_id": spec.generation_session_id,
             "prompt_id": spec.prompt_id,
             "vehicle_family": spec.vehicle_family,
             "intended_condition": spec.intended_condition,
@@ -185,6 +186,34 @@ def _inspect_source_images(
             "split": "",
         }
     return manifest, specs
+
+
+def infer_generation_specs(
+    source_image_dir: Path,
+    generation_session_id: str,
+    vehicle_family: str = "Humvee",
+) -> tuple[GenerationSpec, ...]:
+    """Build deterministic provenance specs when filenames encode the prompts.
+
+    This is intentionally opt-in: curated releases should continue to pass explicit
+    specs.  It is useful for later CVAT batches whose stable filenames are the only
+    available prompt identifiers.
+    """
+    if not generation_session_id.strip():
+        raise ValueError("generation_session_id must not be blank.")
+    paths = sorted(source_image_dir.glob("*.png"), key=lambda path: path.name.lower())
+    if not paths:
+        raise ValueError(f"No PNG images found in {source_image_dir}")
+    return tuple(
+        GenerationSpec(
+            prompt_id=path.stem,
+            image_name=path.name,
+            vehicle_family=vehicle_family,
+            intended_condition=path.stem.replace("_", " "),
+            generation_session_id=generation_session_id,
+        )
+        for path in paths
+    )
 
 
 def _write_source_manifest(
@@ -279,6 +308,9 @@ def import_synthetic_cvat_damage_annotations(
     dimensions = Counter(
         f"{row['width']}x{row['height']}" for row in source_manifest.values()
     )
+    generation_session_ids = sorted(
+        {row["generation_session_id"] for row in source_manifest.values()}
+    )
     manifest: dict[str, object] = {
         "schema_version": 1,
         "dataset_version": dataset_version,
@@ -287,7 +319,10 @@ def import_synthetic_cvat_damage_annotations(
         "source_type": "text_to_image",
         "generator": GENERATOR,
         "generator_model": GENERATOR_MODEL,
-        "generation_session_id": GENERATION_SESSION_ID,
+        "generation_session_id": (
+            generation_session_ids[0] if len(generation_session_ids) == 1 else None
+        ),
+        "generation_session_ids": generation_session_ids,
         "original_export_filename": annotations_path.name,
         "original_export_sha256": sha256_file(annotations_path),
         "sanitized_annotations_sha256": sha256_file(sanitized_xml_path),
@@ -344,15 +379,34 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source-image-dir", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--dataset-version", default="synthetic-humvee-damage-v1")
+    parser.add_argument(
+        "--infer-specs-from-filenames",
+        action="store_true",
+        help="Use sorted PNG stems as prompt IDs instead of the original v1 spec list.",
+    )
+    parser.add_argument(
+        "--generation-session-id",
+        default="",
+        help="Required with --infer-specs-from-filenames.",
+    )
+    parser.add_argument("--vehicle-family", default="Humvee")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    generation_specs = GENERATION_SPECS
+    if args.infer_specs_from_filenames:
+        generation_specs = infer_generation_specs(
+            args.source_image_dir,
+            args.generation_session_id,
+            args.vehicle_family,
+        )
     manifest = import_synthetic_cvat_damage_annotations(
         annotations_path=args.annotations,
         source_image_dir=args.source_image_dir,
         output_dir=args.output_dir,
+        generation_specs=generation_specs,
         dataset_version=args.dataset_version,
     )
     print(f"Validated {manifest['image_count']} images and {manifest['box_count']} boxes.")

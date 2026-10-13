@@ -1,135 +1,109 @@
 # CRATER
 
-CRATER is an interpretable vehicle-component and visible-damage research
-pipeline. The model lineage is intentionally staged so each transfer step can
-be measured on its own:
+Part detection with YOLOX-S, followed by visible-damage classification with ResNet18.
 
-```text
-civilian images -> 23-class component detector
-                         |
-                         v transfer shared detector weights
-military images -> 6-class component detector -> component crops
-                                                     |
-             civilian damage crops -> damage classifier
-                                                     |
-                                                     v fine-tune
-                                      military damage classifier
-```
+## Run
 
-Detector outputs answer **which parts are visible and where**. Damage models
-answer **what visible damage is present in a part crop**. Keeping those datasets,
-experiments, metrics, and checkpoints separate makes failures attributable.
-
-## Current status
-
-- The leakage-resistant civilian Carparts23 dataset preparation is complete.
-- Both 100-epoch civilian YOLOX-S runs are complete. The scratch baseline
-  reached validation COCO AP50:95 `0.422` and AP50 `0.642`; the run initialized
-  from official YOLOX-S COCO weights reached AP50:95 `0.546` and AP50 `0.688`.
-- The COCO-initialized checkpoint is promoted as
-  `carparts23-yolox-s-coco-v1`. Held-out test COCO AP50:95 is `0.580`, AP50 is
-  `0.737`, and AR100 is `0.779`; see the
-  [Stage 1 detector report](docs/reports/carparts23-stage1.md).
-- The `object` class is a known dataset limitation: 5 train instances, 2
-  validation instances, and no test instances. It remains only for checkpoint
-  compatibility and should be removed or relabeled in a future dataset version.
-- The exploratory Humvee initialization comparison is complete on the received
-  224-image, six-label source export. Under the same 100-epoch schedule, scratch
-  initialization reached validation AP50:95 `0.1297`; initialization from
-  `carparts23-yolox-s-coco-v1` reached `0.4784`, an absolute gain of `0.3487`.
-  See the [Humvee comparison report](docs/reports/humvee-source6-initialization-comparison.md).
-- The Humvee result is transfer evidence, not a release-quality military model.
-  The split uses interim photo-series grouping, authoritative provenance is
-  incomplete, the received labels are not the canonical CRATER taxonomy, and a
-  full held-out test evaluation and versioned checkpoint promotion remain.
-- A 16-image military damage-labeling pilot has generated detector-derived
-  crops and review sheets. Its CSV label uploads have not been completed.
-- A separate 224-image CVAT export now provides 2,240 human component boxes
-  with `intact`, `degraded`, `destroyed`, or `unknown` damage states. The
-  validated [source inventory](datasets/military/damage/source/humvee_cvat_damage_v1/README.md)
-  maps those states to canonical CRATER levels without changing the original
-  labels.
-- A separate synthetic source now preserves 30 generated HMMWV images and 251
-  human CVAT damage boxes with generation lineage and integrity hashes. It is a
-  training-only candidate pending synthetic visual QA; it is excluded from
-  validation and test use.
-- Grouped real-image splits and crop materialization remain before training,
-  and no civilian or military damage classifier has been trained.
-- The [part-damage training notebook](experiments/damage/part_damage_classification.ipynb)
-  now prepares reviewed human-box crops, trains on real data, then fine-tunes
-  those checkpoints on synthetic data with real-only validation and testing.
-  Source-group and label review is required before starting either stage.
-
-The scratch checkpoint is retained for comparison. The required transfer
-lineage is the promoted COCO-initialized civilian checkpoint followed by
-military fine-tuning. Generated datasets, checkpoints, logs, annotation runs,
-and outputs remain ignored local artifacts. The approved Humvee source images
-are the explicit exception and are versioned through Git LFS. The exploratory
-Humvee run outputs must be restored or reproduced before downstream work; the
-executed notebook records their results but does not version the checkpoints.
-
-## Repository map
-
-```text
-configs/
-  taxonomy.json                 canonical classes, damage levels, and groups
-datasets/                       ignored by default; selected sources use LFS
-docs/
-  architecture.md               stage boundaries and evaluation policy
-  roadmap.md                    work sequence and deliverables
-  annotation/                   military component and damage-label rules
-  reports/                      versioned stage results and evidence tables
-experiments/
-  detection/                    civilian pretraining and military fine-tuning
-  damage/                       crop-classification experiment contract
-outputs/                        ignored runs grouped by task and domain
-third_party/YOLOX/              pinned upstream detector implementation
-tools/data/                     reproducible dataset preparation tools
-weights/                        ignored external initialization checkpoints
-```
-
-## Reproduce the civilian detector
-
-Install dataset-preparation dependencies and create the local dataset:
+Use one Python environment for both notebooks. Install a matching PyTorch and
+torchvision build for your GPU, then install the remaining dependencies:
 
 ```powershell
 python -m pip install -r requirements.txt
-python tools\data\download_carparts23.py
+python -m ipykernel install --user --name crater --display-name "CRATER"
+python -m jupyter lab
 ```
 
-In a CUDA environment, install the pinned YOLOX checkout and train:
+Select that environment's CRATER kernel. For a fresh environment, first run
+`python -m venv .venv` and use `.venv\Scripts\python.exe` in place of
+`python`. On a fresh clone, run `git submodule update --init --recursive` and
+`git lfs pull` to retrieve YOLOX and the versioned source images. Install the
+detector framework in the same environment with:
 
 ```powershell
-python -m pip install -v -e third_party\YOLOX
-
-python third_party\YOLOX\tools\train.py `
-  -f experiments\detection\yolox_s_carparts23.py `
-  -expn yolox_s_carparts23_pretrained `
-  -d 1 -b 8 --fp16 `
-  -c weights\yolox_s.pth `
-  max_epoch 100 warmup_epochs 5 no_aug_epochs 15 eval_interval 5
+python -m pip install -e third_party/YOLOX
 ```
 
-Increase or decrease batch size only for available GPU memory. Do not use test
-metrics for checkpoint or hyperparameter selection.
+| Task | Notebook |
+| --- | --- |
+| Show part boxes and predicted damage on a few images | [Quick demo](experiments/demo.ipynb) |
+| Prepare splits, train the part detector, inspect detections | [Part detection](experiments/detection/humvee_initialization_comparison.ipynb) |
+| Review part boxes, prepare crops, train and evaluate damage classifiers | [Damage assessment](experiments/damage/part_damage_classification.ipynb) |
 
-For the military fine-tuning command and expected dataset contract, see
-`experiments/detection/README.md`. The canonical class names live in
-`configs/taxonomy.json`; experiment code should not invent alternate spellings.
+Run notebook cells in order. The detector notebook compares scratch training with
+Carparts initialization; its last cell can independently inspect an existing
+detector. Training cells launch training, so skip them when inspecting saved
+detector results. The damage notebook validates and reuses completed stages.
+Use a new damage `RUN_NAME` when changing data or settings.
 
-## Artifact convention
+Notebook outputs are cleared from the working copies to keep them small.
+Checkpoints, metrics and predictions live in `outputs/`. Existing executed
+notebooks and removed legacy files are backed up in
+`outputs/repo_cleanup/before_simplification_20260909_122427.zip` on this machine.
 
-```text
-outputs/detection/civilian/<run>/
-outputs/detection/humvee_source6/<run>/    exploratory received-taxonomy runs
-outputs/detection/military/<run>/
-outputs/damage/civilian/<run>/
-outputs/damage/military/<run>/
+## Models and data
+
+The detector retains the six labels from your Humvee export:
+`wheel_tire`, `windshield`, `door`, `engine_bay`, `weapon_station`,
+and `comms_equipment`. Class order comes from the COCO annotation file.
+
+Damage models use three groups: mobility, structure, and mission equipment.
+They start from ImageNet, train on reviewed real part crops, then fine-tune on
+synthetic crops. Both stages select checkpoints using real validation data.
+If synthetic training does not improve validation, its best checkpoint remains
+the real baseline at epoch 0; `last.pt` contains the final adapted model.
+
+See [labeling rules](docs/labeling.md) for the four damage labels and grouping rules.
+
+| Input or result | Location |
+| --- | --- |
+| Real images and detector annotations | `datasets/military/components/source/humvee/` |
+| Human damage boxes | `datasets/military/damage/source/humvee_cvat_damage_v1/` |
+| Synthetic images and human damage boxes | `datasets/military/damage/source/synthetic_humvee_damage_v1/` |
+| Editable image/group review | `datasets/military/damage/review/humvee_real_synthetic_v1.csv` |
+| Selected part detector | `outputs/detection/humvee_source6/carparts_initialized_seed42/best_ckpt.pth` |
+| Damage run | `outputs/damage/humvee_cvat/humvee_damage_real_then_synthetic_v1/` |
+
+Completed detection and damage runs exist locally. The damage run selected the
+real baseline for all three groups; synthetic fine-tuning did not improve
+validation. Read `validation_comparison.csv`, `validation_history.csv`,
+`selected_checkpoints.json`, and `test_final/comparison.json` in the damage run
+for results. Damage-class coverage is sparse, particularly for mission equipment.
+
+The damage evaluation uses human boxes. Combined detector-to-damage performance
+has not yet been evaluated.
+
+## Supporting code
+
+- `experiments/detection/`: two YOLOX configurations and the Windows-compatible COCO evaluator.
+- `experiments/damage/training.py`: damage training, checkpoint recovery and evaluation.
+- `tools/data/`: Carparts download/preparation, real/synthetic CVAT import, damage crop preparation.
+- `configs/taxonomy.json`: existing taxonomy and damage label contract.
+- `tests/`: annotation import and classifier checks.
+- `third_party/YOLOX/`: pinned detector implementation; see [third-party notices](THIRD_PARTY_NOTICES.md).
+
+The civilian detector's promoted weights are the starting point for Humvee
+fine-tuning. To reproduce that parent, prepare Carparts23 and train:
+
+```powershell
+python tools/data/download_carparts23.py
+python third_party/YOLOX/tools/train.py -f experiments/detection/yolox_s_carparts23.py -expn yolox_s_carparts23_pretrained -d 1 -b 8 --fp16 -c weights/yolox_s.pth max_epoch 100 warmup_epochs 5 no_aug_epochs 15 eval_interval 5
 ```
 
-A run is meaningful only with its experiment file, starting checkpoint, data
-version, split manifest, and validation metrics. Preserve those together when a
-checkpoint is promoted to the next stage.
+The Humvee notebook expects the promoted parent at
+`outputs/detection/civilian/promoted/carparts23-yolox-s-coco-v1/carparts23-yolox-s-coco-v1.pth`
+and checks its hash. Restore that artifact when moving to another computer.
 
-This is a research prototype and decision-support project, not an operationally
-validated or autonomous battle-damage assessment system.
+To import new annotations, use the CVAT importers in `tools/data/`; each exposes
+`--help`. Existing source inventories are already imported. Retain their source
+manifests and XML exports. Review CSVs, generated crops and model weights are
+local files and need to be copied separately between machines.
+
+## Check
+
+```powershell
+python -m pytest tests
+```
+
+Keep related images in the same split, synthetic images in training only, and
+test data out of model selection. Damage describes visible condition; it does
+not establish vehicle operability.
